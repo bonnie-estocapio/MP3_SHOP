@@ -17,8 +17,7 @@ Class Functions
     public function db_connect()
     {
         $this->connection = mysqli_connect('localhost', 'root', 'root', 'music_shop');
-        if(!$this->connection)
-        {
+        if (!$this->connection) {
             echo "Not Connected";
         }
     }
@@ -34,7 +33,7 @@ Class Functions
 
     public function showMessage()
     {
-        if(isset($_SESSION['message'])) {
+        if (isset($_SESSION['message'])) {
             echo $_SESSION['message'];
             unset($_SESSION['message']);
         }
@@ -68,16 +67,15 @@ Class Functions
 
     public function login()
     {
-        if(isset($_POST['submit']))
-        {
+        if (isset($_POST['submit'])) {
             // $connection = $this->db_connect();
             $username = $_POST['username'];
             $password = $_POST['password'];
 
-            $query = $this->query("SELECT id,username FROM users WHERE username = '{$username}' AND password = '{$password}' ");
+            $query = $this->query("SELECT id,username FROM users WHERE username = '{$username}' AND password = '{$password}'");
             $data = mysqli_fetch_assoc($query);
-            if(!$data)
-            {
+
+            if (!$data) {
                 $this->setMessage("Invalid Login Details");
             } else {
                 $_SESSION['loggedin'] = true;
@@ -100,14 +98,14 @@ Class Functions
 
         $query = $this->query("INSERT INTO users (username, password, fullname, address, email) VALUES ('$username', '$password', '$fullname', '$address', '$email')");
 
-        if($query) {
+        if ($query) {
             $this->setMessage("Account Created, Please login");
         }
     }
 
     public function writeSession($sessionID, $username)
     {
-        if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
+        if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
             $query = $this->query("INSERT INTO sessions (session_id, user) VALUES ('$sessionID', '$username')");
         }
     }
@@ -138,14 +136,14 @@ Class Functions
     public function state()
     {
         $guest = true;
-        if(!isset($_SESSION['loggedin']) && $_SESSION['loggedin'] !== true) {
+        if (!isset($_SESSION['loggedin']) && $_SESSION['loggedin'] !== true) {
             $guest = true;
-            for($i = 1; $i<=9; $i++) {
+            for ($i = 1; $i<=9; $i++) {
                 $_SESSION['product_'.$i] = 0;
             }
             $_SESSION['loggedin'] = false;
             $_SESSION['user'] = 'Guest';
-         } else if(isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
+         } elseif (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
             $guest = false;
         }
         return $guest;
@@ -159,12 +157,12 @@ Class Functions
         $body = "Good day " . $_SESSION['user'] ."
                 You have purchased the following: ";
 
-        if(isset($_POST['submit'])) {
-            foreach($_SESSION as $data => $value) {
-                if($value === 1 && substr($data, 0, 8)== "product_") {
+        if (isset($_POST['submit'])) {
+            foreach ($_SESSION as $data => $value) {
+                if ($value === 1 && substr($data, 0, 8)== "product_") {
                     $id = substr($data, 8, strlen($data)-8);
                     $query = $this->query("SELECT * FROM tracks WHERE id =". $id);
-                    while($row = mysqli_fetch_assoc($query)) {
+                    while ($row = mysqli_fetch_assoc($query)) {
                         $dataArray['product_'.$id] = $_SESSION['product_'.$id];
                         $body = $body . "
                             Title: {$row['title']} - Artist: {$row['artist']} - Price: {$row['price']}";
@@ -191,12 +189,12 @@ Class Functions
     public function paymentValidation($paymentArray)
     {
         $check = 0;
-        foreach($paymentArray as $data) {
-            if($data === '') {
+        foreach ($paymentArray as $data) {
+            if ($data === '') {
                 $check = 1;
             }
         }
-        if($check === 1) {
+        if ($check === 1) {
             $this->setMessage("Incomplete details. Try again.");
         } else {
             $this->payment($_SESSION['user'], $_SESSION['total'], $_SESSION['count']);
@@ -205,11 +203,11 @@ Class Functions
 
     public function owned()
     {
-        foreach($_SESSION as $data => $value) {
-            if($value > 0 && substr($data, 0, 8)== "product_") {
+        foreach ($_SESSION as $data => $value) {
+            if ($value > 0 && substr($data, 0, 8)== "product_") {
                 $id = substr($data, 8, strlen($data)-8);
                 $query = $this->query("SELECT * FROM tracks WHERE id =". $id);
-                while($row = mysqli_fetch_assoc($query)) {
+                while ($row = mysqli_fetch_assoc($query)) {
                     $_SESSION['product_'.$id] = 2;
                 }
             }
@@ -221,14 +219,14 @@ Class Functions
     {
         $dataString = http_build_query($dataArray);
         $query = $this->query("INSERT INTO history (username, data, total, count) VALUES ('{$_SESSION['user']}', '{$dataString}', '{$_SESSION['total']}', '{$_SESSION['count']}')");
-        if(!$query) {
+        if (!$query) {
             echo "failed to input data";
         }
     }
 
     public function viewOrderHistory($orderID, $username)
     {
-        if($orderID === NULL){
+        if ($orderID === NULL){
             $orderQuery = $this->query("SELECT id, data, date FROM history WHERE username = '{$username}'");
             while($row = mysqli_fetch_assoc($orderQuery)){
                 $this->showOrderTable($row);
@@ -245,8 +243,8 @@ Class Functions
     {
         $orderArray = [];
         parse_str($orderData['data'], $orderArray);
-        foreach($orderArray as $data => $value) {
-            if($value == 1 && substr($data, 0, 8)== "product_"){
+        foreach ($orderArray as $data => $value) {
+            if ($value == 1 && substr($data, 0, 8)== "product_"){
                 $id = substr($data, 8, strlen($data)-8);
                 $trackQuery = $this->query("SELECT * FROM tracks WHERE id =". $id);
                 while($row = mysqli_fetch_assoc($trackQuery)) {
@@ -269,18 +267,18 @@ Class Functions
     public function writeData($username)
     {
         $dataArray = [];
-        foreach($_SESSION as $data => $value) {
-            if($value > 0 && substr($data, 0, 8)== "product_") {
+        foreach ($_SESSION as $data => $value) {
+            if ($value > 0 && substr($data, 0, 8)== "product_") {
                 $id = substr($data, 8, strlen($data)-8);
                 $query = $this->query("SELECT * FROM tracks WHERE id =". $id);
-                while($row = mysqli_fetch_assoc($query)) {
+                while ($row = mysqli_fetch_assoc($query)) {
                     $dataArray['product_'.$id] = $_SESSION['product_'.$id];
                 }
             }
         }
         $dataString = http_build_query($dataArray);
         $query = $this->query("UPDATE users SET data = '{$dataString}' WHERE username = '{$username}'");
-        if(!$query) {
+        if (!$query) {
             echo "failed to input data";
         }
     }
@@ -293,11 +291,11 @@ Class Functions
         $data['data'] = trim($data['data'], '{()}');
         parse_str($data['data'], $newArray);
 
-        foreach($_SESSION as $data => $value) {
-            if(substr($data, 0, 8)== "product_") {
+        foreach ($_SESSION as $data => $value) {
+            if (substr($data, 0, 8)== "product_") {
                 $id = substr($data, 8, strlen($data)-8);
                 $query = $this->query("SELECT * FROM tracks WHERE id =". $id);
-                while($row = mysqli_fetch_assoc($query)) {
+                while ($row = mysqli_fetch_assoc($query)) {
                     $_SESSION['product_'.$id] = $newArray['product_'.$id];
                 }
             }

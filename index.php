@@ -42,12 +42,12 @@ $guest = $functions->state();
                     <li>
                         <a href="Shop.php">Shop</a>
                     </li>
-                    <?php if($guest === true) {?>
+                    <?php if ($guest === true) {?>
                     <li>                        
                         <a href="login.php">Login</a>
                     </li>
                     <?php } ?>
-                    <?php if($guest === false) {?>
+                    <?php if ($guest === false) {?>
                     <li>                        
                         <a href="logout.php">Logout</a>
                     </li>
@@ -55,7 +55,7 @@ $guest = $functions->state();
                      <li>
                         <a href="checkout.php">Checkout</a>
                     </li>
-                    <?php if($guest === false) {?>
+                    <?php if ($guest === false) {?>
                     <li>
                         <a href="profile.php"><?=$_SESSION['user'];?></a>
                     </li>

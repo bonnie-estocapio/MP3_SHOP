@@ -4,9 +4,9 @@ class Download
 {
     public function downloadTrack()
     {
-        if(isset($_GET['path'])) {
+        if (isset($_GET['path'])) {
         $filename = $_GET['path'];
-        if(file_exists($filename)) {
+        if (file_exists($filename)) {
             header('Content-Description: File Transfer');
             header('Content-Type: application/octet-stream');
             header("Cache-Control: no-cache, must-revalidate");

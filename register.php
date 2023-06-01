@@ -3,7 +3,7 @@
 require_once 'includes/functions.php';
 
 $functions = new Functions;
-if(isset($_POST['submit'])) {
+if (isset($_POST['submit'])) {
     $check = 0;
     foreach($_POST as $data){
         if($data === "") {

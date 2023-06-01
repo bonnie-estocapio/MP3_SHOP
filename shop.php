@@ -45,12 +45,12 @@ $guest = $functions->state();
                     <li>
                         <a href="Shop.php">Shop</a>
                     </li>
-                    <?php if($guest === true) {?>
+                    <?php if ($guest === true) {?>
                     <li>                        
                         <a href="login.php">Login</a>
                     </li>
                     <?php } ?>
-                    <?php if($guest === false) {?>
+                    <?php if ($guest === false) {?>
                     <li>                        
                         <a href="logout.php">Logout</a>
                     </li>
@@ -87,7 +87,7 @@ $guest = $functions->state();
 
                     <!-- TRACK 1 -->
                     <?php
-                    if(!isset($_POST['search'])) {
+                    if (!isset($_POST['search'])) {
                         $tracks->showAllTracks();
                     } elseif (isset($_POST['search']) && isset($_POST['category'])) {
                         if ($_POST['category'] === 'title') {

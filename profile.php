@@ -47,12 +47,12 @@ $_POST['searchtext'] = '';
                     <li>
                         <a href="Shop.php">Shop</a>
                     </li>
-                    <?php if($guest === true) {?>
+                    <?php if ($guest === true) {?>
                     <li>                        
                         <a href="login.php">Login</a>
                     </li>
                     <?php } ?>
-                    <?php if($guest === false) {?>
+                    <?php if ($guest === false) {?>
                     <li>                        
                         <a href="logout.php">Logout</a>
                     </li>
@@ -90,7 +90,7 @@ $_POST['searchtext'] = '';
             <div class="col-md-9">
                 <div class="row">
                     <?php
-                    if($guest === true){
+                    if ($guest === true) {
                         echo "Login to view Library";
                     } elseif ($guest === false) {
                         $tracks->showOwnedTracks();

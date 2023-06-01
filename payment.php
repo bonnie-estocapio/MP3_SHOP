@@ -7,7 +7,7 @@ $functions = new Functions;
 $guest = $functions->state();
 
 
-if(isset($_POST['submit'])) {
+if (isset($_POST['submit'])) {
     $functions->paymentValidation($_POST);
 }
 ?>
@@ -109,7 +109,7 @@ if(isset($_POST['submit'])) {
     </div>
     <?php }?>
 
-    <?php if($guest === true) { ?>
+    <?php if ($guest === true) { ?>
         <h3 class="text-center">Log in first to proceed<a class="btn btn-primary" href="login.php">Login</a></h3>
         <div class=text-center>
         </div>

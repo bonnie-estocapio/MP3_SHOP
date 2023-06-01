@@ -72,14 +72,14 @@ class ShowTrack
                 </div>
             DELIMETER;
             echo $button;
-        } else if ($_SESSION['product_'.$trackID] == 1) {
+        } elseif ($_SESSION['product_'.$trackID] == 1) {
             $button = <<<DELIMETER
                         <a class="btn btn-primary" href="cart.php?remove={$trackID}">Remove from Cart</a>
                     </div>
                 </div>
             DELIMETER;
             echo $button;
-        } else if ($_SESSION['product_'.$trackID] == 2) {
+        } elseif ($_SESSION['product_'.$trackID] == 2) {
             $button = <<<DELIMETER
                         <h5> In Library </h5>
                         <a class="btn btn-primary" href="{$_SERVER['REQUEST_URI']}?path=tracks/{$data['title']}.mp3">Download</a>
