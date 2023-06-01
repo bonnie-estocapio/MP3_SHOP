@@ -2,6 +2,7 @@
 
 require_once 'includes/functions.php';
 require_once 'includes/showTrack.php';
+require_once 'includes/download.php';
 
 session_start();
 
@@ -60,7 +61,7 @@ $_POST['searchtext'] = '';
                         <a href="checkout.php">Checkout</a>
                     </li>
                     <li>
-                        <a href="profile.php"><?=$_SESSION['user'];?></a>
+                        <a href="profile.php"><?=$functions->myHtmlspecialchars($_SESSION['user'] ??"", ENT_QUOTES);?></a>
                     </li>
                     <li>
                         <a href="orderHistory.php">Order History</a>
@@ -75,7 +76,7 @@ $_POST['searchtext'] = '';
     <div class="container">
         <div class="search">
             <form method="post">
-                <input type="text" name="searchtext" value=<?=$_POST['searchtext']?>>
+                <input type="text" name="searchtext">
                 <input type="radio" name="category" value="title"> Title
                 <input type="radio" name="category" value="artist"> Artist
                 <input type="radio" name="category" value="album"> Album 

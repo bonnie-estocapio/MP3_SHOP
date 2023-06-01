@@ -2,6 +2,7 @@
 
 require_once 'includes/functions.php';
 require_once 'includes/showTrack.php';
+require_once 'includes/download.php';
 
 session_start();
 
@@ -58,7 +59,7 @@ $guest = $functions->state();
                         <a href="checkout.php">Checkout</a>
                     </li>
                     <li>
-                        <a href="profile.php"><?=$_SESSION['user'];?></a>
+                        <a href="profile.php"><?=$functions->myHtmlspecialchars($_SESSION['user'] ??"", ENT_QUOTES);?></a>
                     </li>
                 </ul>
                 </div>

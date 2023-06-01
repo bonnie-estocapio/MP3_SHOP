@@ -76,7 +76,7 @@ if(isset($_POST['submit'])) {
                         <a href="checkout.php">Checkout</a>
                     </li>
                     <li>
-                        <a href="profile.php"><?=$_SESSION['user'];?></a>
+                        <a href="profile.php"><?=$functions->myHtmlspecialchars($_SESSION['user'] ??"", ENT_QUOTES);?></a>
                     </li>
                 </ul>
             </div>
@@ -120,9 +120,10 @@ if(isset($_POST['submit'])) {
     <?php }?>
 
     <?php if($guest === true) { ?>
-        <h3 class="text-center">Log in first to proceed</h3>
+        <h3 class="text-center">Log in first to proceed<a class="btn btn-primary" href="login.php">Login</a></h3>
+        <h3 class="text-center">or</h3>
+        <h3 class="text-center">Proceed as guest: <a class="btn btn-primary" href="guest.php">Proceed as Guest</a></h3>
         <div class=text-center>
-            <a class="btn btn-primary" href="login.php">Login</a>
         </div>
     <?php }?>
     </div>
