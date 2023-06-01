@@ -76,7 +76,7 @@ $_POST['searchtext'] = '';
     <div class="container">
         <div class="search">
             <form method="post">
-                <input type="text" name="searchtext">
+                <input type="text" name="searchtext" placeholder="Search here">
                 <input type="radio" name="category" value="title"> Title
                 <input type="radio" name="category" value="artist"> Artist
                 <input type="radio" name="category" value="album"> Album 

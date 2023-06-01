@@ -8,22 +8,8 @@ $guest = $functions->state();
 
 
 if(isset($_POST['submit'])) {
-    print_r($_POST);
-    $check = 0;
-    foreach($_POST as $data){
-        if($data === "") {
-            $check = 1;
-            echo $check;
-        }
-    }
-
-    if ($check === 0){
-        $functions->payment($_SESSION['user'], $_SESSION['total'], $_SESSION['count']);
-    } else {
-        $functions->setMessage("Some fields are not filled. Try again.");
-    }
+    $functions->paymentValidation($_POST);
 }
-
 ?>
 
 <!DOCTYPE html>
@@ -91,27 +77,31 @@ if(isset($_POST['submit'])) {
 
                 <form method="post" action="payment.php">
                 <h3 class="text-center"><?php $functions->showMessage();?></h3>
-                    <div class="row">
-                        <label for="fullname" class="form-label">Name on Card</label>
-                        <input  type="text" name="fullname" class="form-label">
-                    </div>
+                <div class="col-50">
+                    <h3>Payment</h3>
+                </div>
+                <div class="text-center">
+                        <label for="cname">Name on Card</label>
+                        <input type="text" id="cname" name="cardname" placeholder="John More Doe">
+                </div>
+                <div class="text-center">
+                    <label for="ccnum">Credit card number</label>
+                    <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
+                </div>
+                <div class="text-center">
+                    <label for="exp">Expiry</label>
+                    <input type="text" id="expmonth" name="expmonth" placeholder="03-25">
+                </div>
+                <div class="col-50">
+                    <label for="cvv">CVV</label>
+                    <input type="text" id="cvv" name="cvv" placeholder="352">
+                </div>
 
-                    <div class="row">
-                        <label for="card" class="form-label">Card Number</label>
-                        <input  type="text" name="card" class="form-label">
-                    </div>
-
-                    <div class="row">
-                        <label for="address" class="address">CVV</label>
-                        <input  type="text" name="address" class="form-label">
-                    </div>
-
-                    <div class="row">
-                    <div class="mb-3 form-check">
+            <div class="text-center">
+                <div class="mb-3 form-check">
                     <input type="checkbox" name="tos" value="ok" id="tos" class="form-check-input">
                     <label class="form-check-label" for="tos">Accept TOS</label>
                 </div>
-                    </div>
                     <button class="btn btn-primary" type="submit" name="submit" value="payment">Confirm Payment</button>
                 </form>
             </div>

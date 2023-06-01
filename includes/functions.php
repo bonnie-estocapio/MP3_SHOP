@@ -188,6 +188,21 @@ Class Functions
         }
     }
 
+    public function paymentValidation($paymentArray)
+    {
+        $check = 0;
+        foreach($paymentArray as $data) {
+            if($data === '') {
+                $check = 1;
+            }
+        }
+        if($check === 1) {
+            $this->setMessage("Incomplete details. Try again.");
+        } else {
+            $this->payment($_SESSION['user'], $_SESSION['total'], $_SESSION['count']);
+        }
+    }
+
     public function owned()
     {
         foreach($_SESSION as $data => $value) {
