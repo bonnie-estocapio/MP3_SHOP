@@ -121,8 +121,6 @@ if(isset($_POST['submit'])) {
 
     <?php if($guest === true) { ?>
         <h3 class="text-center">Log in first to proceed<a class="btn btn-primary" href="login.php">Login</a></h3>
-        <h3 class="text-center">or</h3>
-        <h3 class="text-center">Proceed as guest: <a class="btn btn-primary" href="guest.php">Proceed as Guest</a></h3>
         <div class=text-center>
         </div>
     <?php }?>
