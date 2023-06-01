@@ -8,8 +8,6 @@ session_start();
 $functions = new Functions;
 $tracks = new ShowTrack;
 $guest = $functions->state();
-
-$_POST['searchtext'] = '';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -72,7 +70,7 @@ $_POST['searchtext'] = '';
     <div class="container">
         <div class="search">
             <form method="post">
-                <input type="text" name="searchtext" value=<?=$_POST['searchtext']?>>
+                <input type="text" name="searchtext" value=Search>
                 <input type="radio" name="category" value="title"> Title
                 <input type="radio" name="category" value="artist"> Artist
                 <input type="radio" name="category" value="album"> Album 
@@ -88,13 +86,12 @@ $_POST['searchtext'] = '';
 
                     <!-- TRACK 1 -->
                     <?php
-                    print_r($_POST);
                     if(!isset($_POST['search'])) {
                         $tracks->showAllTracks();
                     } elseif (isset($_POST['search']) && isset($_POST['category'])) {
                         if ($_POST['category'] === 'title') {
                             $tracks->showSearch($_POST['searchtext'], 'title');
-                        } elseif ($_POST['category'] == 'artist') {
+                        } elseif ($_POST['category'] === 'artist') {
                             $tracks->showSearch($_POST['searchtext'], 'artist');
                         } elseif ($_POST['category'] === 'album') {
                             $tracks->showSearch($_POST['searchtext'], 'album');
