@@ -16,9 +16,8 @@ Class Functions
 
     public function db_connect()
     {
-        global $connection;
-        $connection = mysqli_connect('localhost', 'root', 'root', 'music_shop');
-        if(!$connection)
+        $this->connection = mysqli_connect('localhost', 'root', 'root', 'music_shop');
+        if(!$this->connection)
         {
             echo "Not Connected";
         }
@@ -199,12 +198,12 @@ Class Functions
     public function viewOrderHistory($orderID, $username)
     {
         if($orderID === NULL){
-            $orderQuery = $this->query("SELECT id, data FROM history WHERE username = '{$username}'");
+            $orderQuery = $this->query("SELECT id, data, date FROM history WHERE username = '{$username}'");
             while($row = mysqli_fetch_assoc($orderQuery)){
                 $this->showOrderTable($row);
             }
         } else {
-            $orderQuery = $this->query("SELECT id, data FROM history WHERE username = '{$username}' && id = '{$orderID}'");
+            $orderQuery = $this->query("SELECT id, data, date FROM history WHERE username = '{$username}' && id = '{$orderID}'");
             while($row = mysqli_fetch_assoc($orderQuery)){
                 $this->showOrderTable($row);
             }
@@ -225,6 +224,7 @@ Class Functions
                             <td>{$orderData['id']}</td>
                             <td>{$row['title']}</td>
                             <td>{$row['price']}</td>
+                            <td>{$orderData['date']}</td>
                         </tr>
                     DELIMETER;
                     $this->totalOrder = $this->totalOrder + $row['price'];

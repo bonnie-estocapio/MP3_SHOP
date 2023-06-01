@@ -15,10 +15,8 @@ class ShowTrack
     public function showSearch($search, $category)
     {
         $functions = new Functions;
-        echo $category;
-        echo $search;
         $query = $functions->query("SELECT id FROM tracks WHERE {$category}='{$search}'");
-        if(mysqli_fetch_assoc($query) === null) {
+        if($query === null) {
             echo "Search result not Found";
         } else {
             while($row = mysqli_fetch_assoc($query)) {
