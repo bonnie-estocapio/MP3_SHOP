@@ -84,6 +84,7 @@ $_POST['searchtext'] = '';
                         <th>Order ID</th>
                         <th>Track Purchased</th>
                         <th>Price</th>
+                        <th>Date</th>
                     </tr>
                 </thead>
                 <tbody>
