@@ -1,6 +1,6 @@
 <?php
 
-require_once 'functions.php';
+require_once 'includes/functions.php';
 
 session_start();
 
@@ -55,16 +55,18 @@ $guest = $functions->state();
                      <li>
                         <a href="checkout.php">Checkout</a>
                     </li>
+                    <?php if($guest === false) {?>
                     <li>
                         <a href="profile.php"><?=$_SESSION['user'];?></a>
                     </li>
+                    <?php } ?>
                 </ul>
             </div>
         </div>
     </nav>
 
     <!-- Page Content -->
-
+    <h1 class='text-center'> WELCOME TO MUSIC LOCKER</h1>
         <!-- Footer -->
         <footer>
             <div class="row">
@@ -76,5 +78,4 @@ $guest = $functions->state();
 
     </div>
 </body>
-
 </html>

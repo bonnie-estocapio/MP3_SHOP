@@ -1,12 +1,12 @@
 <?php
 
-require_once 'functions.php';
+require_once 'includes/functions.php';
 session_start();
 $functions = new Functions;
 $guest = $functions->state();
 
 if(isset($_POST['submit'])) {
-    $functions->payment($_SESSION['user'], $_SESSION['total'], $_SESSION['count'], $_POST['card'], $_POST['cvv']);
+    $functions->payment($_SESSION['user'], $_SESSION['total'], $_SESSION['count']);
 }
 ?>
 
@@ -27,6 +27,7 @@ if(isset($_POST['submit'])) {
     <link href="css/shop-homepage.css" rel="stylesheet">
 
 </head>
+
 
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -65,21 +66,27 @@ if(isset($_POST['submit'])) {
             </div>
         </div>
     </nav>
+
+    <?php if($guest === false) { ?>
     <div class="container">
       <header>
             <h1 class="text-center">Input Payment Details</h1>
-            <h3 class="text-center"><?php $functions->showMessage();?></h3> 
             <div class="text-center">
 
-                <form method="post" action="register.php">
+                <form method="post" action="payment.php">
                     <div class="row">
-                        <label for="fullname" class="form-label">Card Number</label>
-                        <input  type="text" name="fullname" class="form-label" />
+                        <label for="fullname" class="form-label">Name on Card</label>
+                        <input  type="text" name="fullname" class="form-label">
+                    </div>
+
+                    <div class="row">
+                        <label for="card" class="form-label">Card Number</label>
+                        <input  type="text" name="card" class="form-label">
                     </div>
 
                     <div class="row">
                         <label for="address" class="address">CVV</label>
-                        <input  type="text" name="address" class="form-label" />
+                        <input  type="text" name="address" class="form-label">
                     </div>
 
                     <div class="row">
@@ -91,8 +98,16 @@ if(isset($_POST['submit'])) {
                     <button class="btn btn-primary" type="submit" name="submit">Confirm Payment</button>
                 </form>
             </div>
-            </header>
+        </header>
+    </div>
+    <?php }?>
+
+    <?php if($guest === true) { ?>
+        <h3 class="text-center">Log in first to proceed</h3>
+        <div class=text-center>
+            <a class="btn btn-primary" href="login.php">Login</a>
         </div>
+    <?php }?>
     </div>
     <div class="container">
         <hr>

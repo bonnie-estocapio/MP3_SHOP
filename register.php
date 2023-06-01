@@ -4,7 +4,13 @@ require_once 'functions.php';
 
 $functions = new Functions;
 if(isset($_POST['submit'])) {
-    $functions->createUser($_POST['username'], $_POST['password'], $_POST['fullname'], $_POST['address'], $_POST['email']);
+    $functions->createUser(
+        $_POST['username'], 
+        $_POST['password'], 
+        $_POST['fullname'], 
+        $_POST['address'], 
+        $_POST['email']
+    );
 }
 ?>
 

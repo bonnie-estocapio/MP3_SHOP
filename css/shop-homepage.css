@@ -22,7 +22,7 @@ body {
 }
 
 .caption {
-    height: 130px;
+    height: 150px;
     overflow: hidden;
 }
 
@@ -55,4 +55,8 @@ footer {
 
 form {
     width: 100%;
+}
+
+.search {
+    padding-bottom: 10px;
 }

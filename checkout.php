@@ -1,10 +1,12 @@
 <?php
 
-require_once 'functions.php';
+require_once 'includes/functions.php';
+require_once 'includes/cartFunctions.php';
 
 session_start();
 
 $functions = new Functions;
+$cart = new CartFunctions;
 $guest = $functions->state();
 ?>
 <!DOCTYPE html>
@@ -68,27 +70,27 @@ $guest = $functions->state();
     <!-- Page Content -->
     <div class="container">
     
-<!-- /.row --> 
+        <!-- /.row --> 
 
-<div class="row">
+        <div class="row">
 
-      <h1>Checkout</h1>
+            <h1>Checkout</h1>
 
-<form action="">
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Title</th>
-                <th>Artist</th>
-                <th>Price</th>
-            </tr>
-        </thead>
-        <tbody>
-           <?php $functions->viewCart(); ?>
-        </tbody>
-    </table>
-    <a class="btn btn-primary" href="shop.php">Continue Shopping</a>
-</form>
+        <form action="">
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Artist</th>
+                        <th>Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                <?php $cart->viewCart(); ?>
+                </tbody>
+            </table>
+            <a class="btn btn-primary" href="shop.php">Continue Shopping</a>
+        </form>
 
 
 
