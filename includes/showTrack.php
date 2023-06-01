@@ -1,6 +1,7 @@
 <?php
 
-require_once 'includes/functions.php';
+require_once 'functions.php';
+require_once 'download.php';
 
 class ShowTrack
 {
@@ -48,6 +49,8 @@ class ShowTrack
     
     public function showTrack($trackID)
     {
+        $download = new Download;
+        $download->downloadTrack();
         $data = $this->list($trackID);
         $track = <<<DELIMETER
             <div class="col-sm-4 col-lg-4 col-md-4">
@@ -79,7 +82,7 @@ class ShowTrack
         } else if ($_SESSION['product_'.$trackID] == 2) {
             $button = <<<DELIMETER
                         <h5> In Library </h5>
-                        <a class="btn btn-primary" href="">Download</a>
+                        <a class="btn btn-primary" href="{$_SERVER['REQUEST_URI']}?path=tracks/{$data['title']}.mp3">Download</a>
                     </div>
                 </div>
             DELIMETER;

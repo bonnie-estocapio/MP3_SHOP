@@ -40,9 +40,25 @@ Class Functions
         }
     }
 
+    public function currentLoc()
+    {
+        $_SERVER['REQUEST_URI'];
+    }
     public function navigate($location)
     {
         header("Location: {$location}");
+    }
+
+    public function myHtmlspecialchars($s, $flags=null)
+    {
+        if (is_string($s))
+        {
+            return($flags === null) ? htmlspecialchars($s) : htmlspecialchars($s, $flags);
+        }
+        else
+        {
+            return "";
+        }
     }
 
     public function query($sql)
