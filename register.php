@@ -1,17 +1,29 @@
 <?php
 
-require_once 'functions.php';
+require_once 'includes/functions.php';
 
 $functions = new Functions;
 if(isset($_POST['submit'])) {
-    $functions->createUser(
-        $_POST['username'], 
-        $_POST['password'], 
-        $_POST['fullname'], 
-        $_POST['address'], 
-        $_POST['email']
-    );
+    $check = 0;
+    foreach($_POST as $data){
+        if($data === "") {
+            $check = 1;
+        }
+    }
+    if ($check === 0){
+        $functions->createUser(
+            $_POST['username'], 
+            $_POST['password'], 
+            $_POST['fullname'], 
+            $_POST['address'], 
+            $_POST['email']    
+        );
+    } else {
+        $functions->setMessage("Some fields are not filled. Try again.");
+    }
 }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -93,7 +105,7 @@ if(isset($_POST['submit'])) {
                         <label for="email" class="form-label">Email:</label>
                         <input  type="email" name="email" id="email" class="form-label" class="form-control">
                     </div>
-                    <button class="btn btn-primary" type="submit" name="submit">Register</button>
+                    <button class="btn btn-primary" type="submit" name="submit" value="register">Register</button>
                 </form>
             </div>
             </header>

@@ -7,10 +7,6 @@ session_start();
 $functions = new Functions;
 $functions->login();
 
-if (isset($_POST['submit'])) {
-    $functions->createUser();
-}
-
 if (isset($_POST['signup'])) {
     $functions->navigate("register.php");
 }

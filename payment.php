@@ -1,13 +1,29 @@
 <?php
 
 require_once 'includes/functions.php';
+
 session_start();
 $functions = new Functions;
 $guest = $functions->state();
 
+
 if(isset($_POST['submit'])) {
-    $functions->payment($_SESSION['user'], $_SESSION['total'], $_SESSION['count']);
+    print_r($_POST);
+    $check = 0;
+    foreach($_POST as $data){
+        if($data === "") {
+            $check = 1;
+            echo $check;
+        }
+    }
+
+    if ($check === 0){
+        $functions->payment($_SESSION['user'], $_SESSION['total'], $_SESSION['count']);
+    } else {
+        $functions->setMessage("Some fields are not filled. Try again.");
+    }
 }
+
 ?>
 
 <!DOCTYPE html>
@@ -74,6 +90,7 @@ if(isset($_POST['submit'])) {
             <div class="text-center">
 
                 <form method="post" action="payment.php">
+                <h3 class="text-center"><?php $functions->showMessage();?></h3>
                     <div class="row">
                         <label for="fullname" class="form-label">Name on Card</label>
                         <input  type="text" name="fullname" class="form-label">
@@ -95,7 +112,7 @@ if(isset($_POST['submit'])) {
                     <label class="form-check-label" for="tos">Accept TOS</label>
                 </div>
                     </div>
-                    <button class="btn btn-primary" type="submit" name="submit">Confirm Payment</button>
+                    <button class="btn btn-primary" type="submit" name="submit" value="payment">Confirm Payment</button>
                 </form>
             </div>
         </header>
