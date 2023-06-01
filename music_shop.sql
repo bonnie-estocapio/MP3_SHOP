@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 01, 2023 at 08:51 AM
+-- Generation Time: Jun 01, 2023 at 08:52 AM
 -- Server version: 10.4.27-MariaDB
 -- PHP Version: 8.2.0
 
@@ -46,13 +46,6 @@ CREATE TABLE `sessions` (
   `session_id` varchar(40) NOT NULL,
   `user` varchar(32) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci;
-
---
--- Dumping data for table `sessions`
---
-
-INSERT INTO `sessions` (`session_id`, `user`) VALUES
-('hibpjt4ipgn28fddarlh8nh61c', 'kzkr');
 
 -- --------------------------------------------------------
 
