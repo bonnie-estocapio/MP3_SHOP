@@ -7,6 +7,8 @@ Class Functions
     public float $totalOrder = 0;
     public int $countOrder = 0;
     public bool $guest = true;
+    public $connection;
+
     public function __construct()
     {
         $this->db_connect();
@@ -46,8 +48,7 @@ Class Functions
 
     public function query($sql)
     {
-        global $connection;
-        return mysqli_query($connection, $sql);
+        return mysqli_query($this->connection, $sql);
     }
 
     public function login()
@@ -76,11 +77,16 @@ Class Functions
 
     public function createUser($username, $password, $fullname, $address, $email)
     {
-        if (isset($_POST['submit'])) {
-            $query = $this->query("INSERT INTO users (username, password, fullname, address, email) VALUES ('$username', '$password', '$fullname', '$address', '$email')");
-            if($query) {
-                $this->setMessage("Account Created, Please login");
-            }
+        $username = mysqli_real_escape_string($this->connection, $username);//clean data
+        $password = mysqli_real_escape_string($this->connection, $password);//clean data
+        $fullname = mysqli_real_escape_string($this->connection, $fullname);//clean data
+        $address = mysqli_real_escape_string($this->connection, $address);//clean data 
+        $email = mysqli_real_escape_string($this->connection, $email);//clean data 
+
+        $query = $this->query("INSERT INTO users (username, password, fullname, address, email) VALUES ('$username', '$password', '$fullname', '$address', '$email')");
+
+        if($query) {
+            $this->setMessage("Account Created, Please login");
         }
     }
 

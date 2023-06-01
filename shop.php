@@ -88,13 +88,13 @@ $_POST['searchtext'] = '';
 
                     <!-- TRACK 1 -->
                     <?php
-                
+                    print_r($_POST);
                     if(!isset($_POST['search'])) {
                         $tracks->showAllTracks();
                     } elseif (isset($_POST['search']) && isset($_POST['category'])) {
                         if ($_POST['category'] === 'title') {
                             $tracks->showSearch($_POST['searchtext'], 'title');
-                        } elseif ($_POST['category'] === 'artist') {
+                        } elseif ($_POST['category'] == 'artist') {
                             $tracks->showSearch($_POST['searchtext'], 'artist');
                         } elseif ($_POST['category'] === 'album') {
                             $tracks->showSearch($_POST['searchtext'], 'album');
@@ -102,8 +102,6 @@ $_POST['searchtext'] = '';
                             $tracks->showSearch($_POST['searchtext'], 'genre');
                         } elseif ($_POST['category'] === 'year') {
                             $tracks->showSearch($_POST['searchtext'], 'year');
-                        } else { 
-                            $tracks->showSearch('*', 'id');
                         }
                     } elseif (isset($_POST['search']) && !isset($_POST['category'])) {
                         echo
@@ -114,8 +112,6 @@ $_POST['searchtext'] = '';
                         ";
                         $tracks->showAllTracks();
                     }
-
-
                     ?>
                 </div>
             </div>

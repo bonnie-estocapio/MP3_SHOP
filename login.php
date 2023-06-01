@@ -7,6 +7,10 @@ session_start();
 $functions = new Functions;
 $functions->login();
 
+if (isset($_POST['submit'])) {
+    $functions->createUser();
+}
+
 if (isset($_POST['signup'])) {
     $functions->navigate("register.php");
 }
@@ -70,7 +74,7 @@ if (isset($_POST['signup'])) {
                     username<input type="text" name="username" class="form-control"></label>
                 </div>
                  <div class="form-group"><label for="password">
-                    Password<input type="text" name="password" class="form-control"></label>
+                    Password<input type="password" name="password" class="form-control"></label>
                 </div>
 
                 <div class="form-group">
