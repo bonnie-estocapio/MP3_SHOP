@@ -17,7 +17,7 @@ Class Send
             $mail->Host = 'smtp.gmail.com';
             $mail->SMTPAuth = true;
             $mail->Username = "kyle.estocapio031@gmail.com";
-            $mail->Password = 'ihxajhzasosalhvw';
+            $mail->Password = 'cqgblmhiobpcxrlx';
             $mail->SMTPSecure = 'ssl';
             $mail->Port = 465;
 
