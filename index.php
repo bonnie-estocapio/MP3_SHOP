@@ -7,20 +7,9 @@ session_start();
 $functions = new Functions;
 $guest = $functions->state();
 ?>
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
 
-    <title>Home - Music Locker</title>
-
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/shop-homepage.css" rel="stylesheet">
-
+<?php include 'templates/header.php'; ?>
+<title>Home - Music Locker</title>
 </head>
 <body>
     <!-- Navigation -->
@@ -67,15 +56,5 @@ $guest = $functions->state();
 
     <!-- Page Content -->
     <h1 class='text-center'> WELCOME TO MUSIC LOCKER</h1>
-        <!-- Footer -->
-        <footer>
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy; Your Website 2030</p>
-                </div>
-            </div>
-        </footer>
 
-    </div>
-</body>
-</html>
+<?php include 'templates/footer.php'; ?>

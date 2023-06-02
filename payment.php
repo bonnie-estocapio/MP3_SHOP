@@ -15,21 +15,9 @@ if (isset($_POST['submit'])) {
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-
-    <title>Payment - Music Locker</title>
-
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/shop-homepage.css" rel="stylesheet">
-
+<?php include 'templates/header.php'; ?>
+<title>Payment - Music Locker</title>
 </head>
-
 
 <body>
     <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -118,17 +106,5 @@ if (isset($_POST['submit'])) {
     <div class="container">
         <hr>
         <!-- Footer -->
-        <footer>
-            <div class="row">
-                <div class="col-lg-12">
-                    <p>Copyright &copy; Music Locker 2023</p>
-                </div>
-            </div>
-        </footer>
-    </div>
-    <script src="js/jquery.js"></script>
-    <script src="js/bootstrap.min.js"></script>
 
-</body>
-
-</html>
+<?php include 'templates/footer.php'; ?>
