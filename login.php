@@ -1,14 +1,18 @@
 <?php
 
-require_once 'includes/functions.php';
+require_once 'includes/autoload.php';
+
+$autoload = new Autoload;
+$message = new Message;
+$user = new User;
+$navigation = new Navigation;
 
 session_start();
 
-$functions = new Functions;
-$functions->login();
+$user->login();
 
 if (isset($_POST['signup'])) {
-    $functions->navigate("register.php");
+    $navigation->goTo("register.php");
 }
 ?>
 
@@ -48,7 +52,7 @@ if (isset($_POST['signup'])) {
     <div class="container">
       <header>
             <h1 class="text-center">Login</h1>
-            <h3 class="text-center"><?php $functions->showMessage();?></h3>
+            <h3 class="text-center"><?php $message->show();?></h3>
         <div class="col-sm-4 col-sm-offset-5">         
             <form class="" action="" method="post" enctype="multipart/form-data">
                 <div class="form-group"><label for="">
