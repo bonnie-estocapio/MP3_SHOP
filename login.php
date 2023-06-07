@@ -2,7 +2,6 @@
 
 require_once 'includes/autoload.php';
 
-$autoload = new Autoload;
 $message = new Message;
 $user = new User;
 $navigation = new Navigation;

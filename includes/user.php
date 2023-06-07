@@ -1,8 +1,6 @@
 <?php
 require_once 'autoload.php';
 
-$autoload = new Autoload;
-
 Class User
 {
     public function login()
