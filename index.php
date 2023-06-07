@@ -2,7 +2,6 @@
 
 require_once 'includes/autoload.php';
 
-$autoload = new Autoload;
 $functions = new Functions;
 
 session_start();
