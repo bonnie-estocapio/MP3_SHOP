@@ -1,27 +1,26 @@
 <?php
 
-require_once 'functions.php';
-require_once 'download.php';
+require_once 'autoload.php';
 
 class Track
 {
     public function list($trackID)
     {
-        $functions = new Functions;
-        $query = $functions->query("SELECT id, title, artist, year, album, genre,price FROM tracks WHERE id=$trackID");
+        $database = new Database;
+        $query = $database->query("SELECT id, title, artist, year, album, genre,price FROM tracks WHERE id=$trackID");
         $data = mysqli_fetch_assoc($query);
         return $data;
     }
 
     public function search($search, $category)
     {
-        $functions = new Functions;
-        $query = $functions->query("SELECT id FROM tracks WHERE {$category}='{$search}'");
+        $database = new Database;
+        $query = $database->query("SELECT id FROM tracks WHERE {$category}='{$search}'");
         if($query === null) {
             echo "Search result not Found";
         } else {
             while($row = mysqli_fetch_assoc($query)) {
-                $this->showTrack($row['id']);
+                $this->display($row['id']);
             }
         }
     }
@@ -32,7 +31,7 @@ class Track
         foreach($_SESSION as $data => $value) {
             if($value == 2 && substr($data, 0, 8)== "product_") {
                     $id = substr($data, 8, strlen($data)-8);
-                    $this->showTrack($id);
+                    $this->display($id);
             }
         }
     }
@@ -40,9 +39,9 @@ class Track
     public function all()
     {
         $count = 1;
-        $trackTotal = $this->trackTotal();                    
+        $trackTotal = $this->count();                    
         while($count <= $trackTotal) {
-            $this->showTrack($count);
+            $this->display($count);
             $count++;
         }
     }
@@ -94,9 +93,9 @@ class Track
 
     public function count()
     {
-        $functions = new Functions;
+        $database = new Database;
         $count = 0;
-        $query = $functions->query("SELECT id FROM tracks");
+        $query = $database->query("SELECT id FROM tracks");
         while($row = mysqli_fetch_assoc($query))
         {
             $count++;
