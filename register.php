@@ -1,8 +1,10 @@
 <?php
 
-require_once 'includes/functions.php';
+require_once 'includes/autoload.php';
 
-$functions = new Functions;
+$user = new User;
+$message = new Message;
+
 if (isset($_POST['submit'])) {
     $check = 0;
     foreach($_POST as $data){
@@ -11,7 +13,7 @@ if (isset($_POST['submit'])) {
         }
     }
     if ($check === 0){
-        $functions->createUser(
+        $user->create(
             $_POST['username'], 
             $_POST['password'], 
             $_POST['fullname'], 
@@ -19,7 +21,7 @@ if (isset($_POST['submit'])) {
             $_POST['email']    
         );
     } else {
-        $functions->setMessage("Some fields are not filled. Try again.");
+        $message->set("Some fields are not filled. Try again.");
     }
 }
 ?>
@@ -29,39 +31,13 @@ if (isset($_POST['submit'])) {
 </head>
 
 <body>
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="index.php">Music Locker</a>
-            </div>
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav">
-                    <li>
-                        <a href="Shop.php">Shop</a>
-                    </li>
-                    <li>
-                        <a href="login.php">Login</a>
-                    </li>
-                     <li>
-                        <a href="checkout.php">Checkout</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+<?php include 'templates/navbar.php'; ?>
 
     <!-- Page Content -->
     <div class="container">
       <header>
             <h1 class="text-center">SIGN-UP</h1>
-            <h3 class="text-center"><?php $functions->showMessage();?></h3> 
+            <h3 class="text-center"><?php $message->show();?></h3> 
             <div class="text-center">
 
                 <form method="post" action="register.php">
