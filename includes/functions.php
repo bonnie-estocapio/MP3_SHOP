@@ -1,5 +1,7 @@
 <?php
 
+require_once 'autoload.php';
+
 Class Functions
 {
     public float $totalOrder = 0;
@@ -20,16 +22,22 @@ Class Functions
 
     public function state()
     {
-        $guest = true;
-        if (!isset($_SESSION['loggedin']) && $_SESSION['loggedin'] !== true) {
+        $navigation = new Navigation;
+        $location = $navigation->getCurrent();
+        if($location !== '/Music_Shop/register.php'){
             $guest = true;
-            for ($i = 1; $i<=9; $i++) {
-                $_SESSION['product_'.$i] = 0;
+            if (!isset($_SESSION['loggedin']) && $_SESSION['loggedin'] !== true) {
+                $guest = true;
+                for ($i = 1; $i<=9; $i++) {
+                    $_SESSION['product_'.$i] = 0;
+                }
+                $_SESSION['loggedin'] = false;
+                $_SESSION['user'] = 'Guest';
+                } elseif (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
+                $guest = false;
             }
-            $_SESSION['loggedin'] = false;
-            $_SESSION['user'] = 'Guest';
-         } elseif (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
-            $guest = false;
+        } else {
+            $guest = true;
         }
         return $guest;
     }
