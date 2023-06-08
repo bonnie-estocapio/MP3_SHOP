@@ -102,4 +102,11 @@ class Track
         }
         return $count;
     }
+
+    public function getQuery($id)
+    {
+        $database = new Database;
+        $query = $database->query("SELECT * FROM tracks WHERE id =". $id);
+        return $query
+    }
 }
