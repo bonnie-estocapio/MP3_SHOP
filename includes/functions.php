@@ -4,8 +4,6 @@ require_once 'autoload.php';
 
 Class Functions
 {
-    public float $totalOrder = 0;
-    public int $countOrder = 0;
     private bool $guest = true;
 
     public function filter($s, $flags=null)

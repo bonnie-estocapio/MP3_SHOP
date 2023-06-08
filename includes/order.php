@@ -2,10 +2,11 @@
 
 require_once 'autoload.php';
 
-$autoload = new Autoload;
-
 Class Order
 {
+    public float $total = 0;
+    public int $count = 0;
+
     public function writeOrderHistory($dataArray)
     {
         $dbase = new Database;
@@ -34,7 +35,7 @@ Class Order
 
     public function showOrderTable($orderData)
     {
-        $dbase = new Database;
+        $track = new Track;
         $functions = new Functions;
 
         $orderArray = [];
@@ -43,7 +44,7 @@ Class Order
         foreach ($orderArray as $data => $value) {
             if ($value == 1 && substr($data, 0, 8)== "product_"){
                 $id = substr($data, 8, strlen($data)-8);
-                $trackQuery = $dbase->query("SELECT * FROM tracks WHERE id =". $id);
+                $trackQuery = $track->getQuery($id);
                 while($row = mysqli_fetch_assoc($trackQuery)) {
                     $order = <<<DELIMETER
                         <tr>
@@ -53,8 +54,8 @@ Class Order
                             <td>{$orderData['date']}</td>
                         </tr>
                     DELIMETER;
-                    $functions->totalOrder = $functions->totalOrder + $row['price'];
-                    $functions->countOrder++;
+                    $this->total = $this->total + $row['price'];
+                    $this->count++;
                     echo $order;
                 }
             }
