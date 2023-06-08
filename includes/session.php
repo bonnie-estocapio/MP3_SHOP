@@ -1,11 +1,13 @@
 <?php
+require_once 'includes/autoload.php';
 
 Class Session
 {
     public function write($sessionID, $username)
     {
+        $database = new Database;
         if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
-            $query = $this->query("INSERT INTO sessions (session_id, user) VALUES ('$sessionID', '$username')");
+            $query = $database->query("INSERT INTO sessions (session_id, user) VALUES ('$sessionID', '$username')");
         }
     }
 }
