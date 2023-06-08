@@ -1,13 +1,11 @@
 <?php
 
-require_once 'includes/functions.php';
-require_once 'includes/showTrack.php';
-require_once 'includes/download.php';
+require_once 'includes/autoload.php';
 
 session_start();
 
 $functions = new Functions;
-$tracks = new ShowTrack;
+$tracks = new Track;
 $guest = $functions->state();
 ?>
 
@@ -17,44 +15,7 @@ $guest = $functions->state();
 
 <body>
     <!-- Navigation -->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container">
-            <!-- Brand and toggle get grouped for better mobile display -->
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-                    <span class="sr-only">Toggle navigation</span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="index.php">Music Locker</a>
-            </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav">
-                    <li>
-                        <a href="Shop.php">Shop</a>
-                    </li>
-                    <?php if ($guest === true) {?>
-                    <li>                        
-                        <a href="login.php">Login</a>
-                    </li>
-                    <?php } ?>
-                    <?php if ($guest === false) {?>
-                    <li>                        
-                        <a href="logout.php">Logout</a>
-                    </li>
-                    <?php } ?>
-                     <li>
-                        <a href="checkout.php">Checkout</a>
-                    </li>
-                    <li>
-                        <a href="profile.php"><?=$functions->myHtmlspecialchars($_SESSION['user'] ??"", ENT_QUOTES);?></a>
-                    </li>
-                </ul>
-                </div>
-            </div>
-    </nav>
+<?php include 'templates/navbar.php'; ?>
 
     <!-- Page Content -->
     
@@ -78,18 +39,18 @@ $guest = $functions->state();
                     <!-- TRACK 1 -->
                     <?php
                     if (!isset($_POST['search'])) {
-                        $tracks->showAllTracks();
+                        $tracks->all();
                     } elseif (isset($_POST['search']) && isset($_POST['category'])) {
                         if ($_POST['category'] === 'title') {
-                            $tracks->showSearch($_POST['searchtext'], 'title');
+                            $tracks->search($_POST['searchtext'], 'title');
                         } elseif ($_POST['category'] === 'artist') {
-                            $tracks->showSearch($_POST['searchtext'], 'artist');
+                            $tracks->search($_POST['searchtext'], 'artist');
                         } elseif ($_POST['category'] === 'album') {
-                            $tracks->showSearch($_POST['searchtext'], 'album');
+                            $tracks->search($_POST['searchtext'], 'album');
                         } elseif ($_POST['category'] === 'genre') {
-                            $tracks->showSearch($_POST['searchtext'], 'genre');
+                            $tracks->search($_POST['searchtext'], 'genre');
                         } elseif ($_POST['category'] === 'year') {
-                            $tracks->showSearch($_POST['searchtext'], 'year');
+                            $tracks->search($_POST['searchtext'], 'year');
                         }
                     } elseif (isset($_POST['search']) && !isset($_POST['category'])) {
                         echo
@@ -98,7 +59,7 @@ $guest = $functions->state();
                         alert('Category not Set');
                         </script>
                         ";
-                        $tracks->showAllTracks();
+                        $tracks->all();
                     }
                     ?>
                 </div>
