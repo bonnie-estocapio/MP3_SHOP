@@ -1,7 +1,7 @@
 <?php
 
-require_once 'includes/functions.php';
+require_once 'includes/autoload.php';
 
-$functions = new Functions;
+$user = new User;
 
-$functions->logout();
+$user->logout();
