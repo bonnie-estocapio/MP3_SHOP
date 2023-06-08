@@ -107,6 +107,6 @@ class Track
     {
         $database = new Database;
         $query = $database->query("SELECT * FROM tracks WHERE id =". $id);
-        return $query
+        return $query;
     }
 }
