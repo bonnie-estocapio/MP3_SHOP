@@ -9,8 +9,12 @@ require 'phpmailer/src/SMTP.php';
 
 Class Mail
 {
+    public bool $success;
+
     public function send($email, $body)
     {
+        
+
         if(isset($_POST['submit'])) {
             $mail = new PHPMailer(true);
 
@@ -29,20 +33,55 @@ Class Mail
             $mail->Subject = "Order from Music locker";
             $mail->Body = $body;
 
-            $mail->send();
+            if($mail->send()) {
+                echo
+                "
+                <script>
+                alert('Purchase Successfully, Order Details sent via Email');
+                document.location.href='shop.php';
+                </script>
+                ";
+                return true;
+            } else {
+                echo
+                "
+                <script>
+                alert('Purchase Failed. Try Again');
+                </script>
+                ";
+                return false;
+            }
 
-            echo
-            "
-            <script>
-            alert('Purchase Successfully, Order Details sent via Email');
-            document.location.href='shop.php';
-            </script>
-            ";
+
         }
     }
 
-    public function setBody()
+    public function setBody($total, $count)
     {
-        
+        $database = new Database;
+
+        $body = "Good day " . $_SESSION['user'] ."
+                You have purchased the following: ";
+        foreach ($_SESSION as $data => $value) {
+            if ($value === 1 && substr($data, 0, 8) == "product_") {
+                $id = substr($data, 8, strlen($data)-8);
+                $query = $database->query("SELECT * FROM tracks WHERE id =". $id);
+                while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
+                    $dataArray['product_'.$id] = $_SESSION['product_'.$id];
+                    $body = $body . "
+                        Title: {$row['title']} - Artist: {$row['artist']} - Price: {$row['price']}";
+                }
+            }
+        }
+
+        $query = $database->query("SELECT id FROM history ORDER BY id DESC LIMIT 1");
+        $orderID = mysqli_fetch_assoc($query);
+        $body .="
+                with a total of $ {$total} for {$count} items.
+                
+                Thank you for your purchase.
+                
+                Link for Order Details: http://localhost/Music_shop/orderHistory.php?orderID=" . $orderID['id'];
+        $body = nl2br($body);
     }
 }
