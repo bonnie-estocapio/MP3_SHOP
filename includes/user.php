@@ -17,7 +17,7 @@ Class User
             $password = $_POST['password'];
 
             $query = $database->query("SELECT id,username FROM users WHERE username = '{$username}' AND password = '{$password}'");
-            $data = mysqli_fetch_assoc($query);
+            $data = $query->fetch(PDO::FETCH_ASSOC);
 
             if (!$data) {
                 $message->set("Invalid Login Details");
@@ -36,14 +36,14 @@ Class User
         $database = new Database;
         $message = new Message;
 
-        $username = mysqli_real_escape_string($database->connection, $username);//clean data
-        $password = mysqli_real_escape_string($database->connection, $password);//clean data
-        $fullname = mysqli_real_escape_string($database->connection, $fullname);//clean data
-        $address = mysqli_real_escape_string($database->connection, $address);//clean data 
-        $email = mysqli_real_escape_string($database->connection, $email);//clean data 
+        $username = $database->conn->quote($username);
+        $password = $database->conn->quote($password);
+        $fullname = $database->conn->quote($fullname);
+        $address = $database->conn->quote($address);
+        $email = $database->conn->quote($email);
 
-        $query = $database->query("INSERT INTO users (username, password, fullname, address, email) VALUES ('$username', '$password', '$fullname', '$address', '$email')");
-
+        $query = $database->query("INSERT INTO users (username, password, fullname, address, email) VALUES ($username, $password, $fullname, $address, $email)");
+        
         if ($query) {
             $message->set("Account Created, Please login");
         }
