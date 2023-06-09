@@ -8,7 +8,7 @@ class Track
     {
         $database = new Database;
         $query = $database->query("SELECT id, title, artist, year, album, genre,price FROM tracks WHERE id=$trackID");
-        $data = mysqli_fetch_assoc($query);
+        $data = $query->fetch(PDO::FETCH_ASSOC);
         return $data;
     }
 
@@ -19,7 +19,7 @@ class Track
         if($query === null) {
             echo "Search result not Found";
         } else {
-            while($row = mysqli_fetch_assoc($query)) {
+            while($row = $query->fetch(PDO::FETCH_ASSOC)) {
                 $this->display($row['id']);
             }
         }
@@ -96,7 +96,7 @@ class Track
         $database = new Database;
         $count = 0;
         $query = $database->query("SELECT id FROM tracks");
-        while($row = mysqli_fetch_assoc($query))
+        while($row = $query->fetch(PDO::FETCH_ASSOC))
         {
             $count++;
         }
