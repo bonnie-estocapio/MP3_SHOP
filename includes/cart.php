@@ -2,8 +2,6 @@
 
 require_once 'autoload.php';
 
-$autoload = new Autoload;
-
 class Cart
 {
     public function add()
@@ -19,22 +17,21 @@ class Cart
     {
         $navigation = new Navigation;
         if (isset($_GET['remove'])) {
-            $_SESSION['product_' . $_GET['remove']]=0;
+            $_SESSION['product_' . $_GET['remove']] = 0;
             $navigation->goTo("checkout.php");
         }
     }
 
     public function view()
     {   
-        $dbase = new Database;
-        $functions = new Functions;
+        $track = new Track;
         $total=0;
         $count=0;
         foreach ($_SESSION as $data => $value) {
-            if ($value == 1 && substr($data, 0, 8)== "product_") {
+            if ($value == 1 && substr($data, 0, 8) === "product_") {
                 $id = substr($data, 8, strlen($data)-8);
-                $query = $dbase->query("SELECT * FROM tracks WHERE id =". $id);
-                while ($row = mysqli_fetch_assoc($query)) {
+                $query = $track->getQuery($id);
+                while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
                     $product = <<<DELIMETER
                         <tr>
                             <td>{$row['title']}</td>
