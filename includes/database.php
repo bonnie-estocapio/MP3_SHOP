@@ -2,7 +2,11 @@
 
 Class Database
 {
-    public $connection;
+    protected $db_username = 'root';
+    protected $db_password = 'root';
+    protected $db_host = 'localhost';
+    protected $db_name = 'music_shop';
+    public $conn;
 
     public function __construct()
     {
@@ -11,15 +15,19 @@ Class Database
 
     public function db_connect()
     {
-        
-        $this->connection = mysqli_connect('localhost', 'root', 'root', 'music_shop');
-        if (!$this->connection) {
-            echo "Not Connected";
+        try {
+            $this->conn = new PDO("mysql:host=" . $this->db_host . ";dbname=" . $this->db_name , $this->db_username, $this->db_password);
+            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); 
+        } catch (PDOException $e) {
+            print "Error!: " . $e->getMessage() . "<br/>";
+            die();
         }
     }
 
     public function query($sql)
     {
-        return mysqli_query($this->connection, $sql);
+        $query = $this->conn->prepare($sql);
+        $query->execute();
+        return $query;
     }
 }
