@@ -7,7 +7,7 @@ $message = new Message;
 
 if (isset($_POST['submit'])) {
     $check = 0;
-    foreach($_POST as $data){
+    foreach($_POST as $data) {
         if($data === "") {
             $check = 1;
         }
