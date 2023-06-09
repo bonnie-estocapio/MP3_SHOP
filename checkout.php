@@ -1,6 +1,6 @@
 <?php
 
-require_once 'autoload.php';
+require_once 'includes/autoload.php';
 
 session_start();
 
