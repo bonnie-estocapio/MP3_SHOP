@@ -1,10 +1,9 @@
 <?php
 
-require_once 'includes/functions.php';
-require_once 'includes/cartFunctions.php';
+require_once 'autoload.php';
 session_start();
 
 $functions = new Functions;
-$cart = new CartFunctions;
-$cart->addCart();
-$cart->removeCart();
+$cart = new Cart;
+$cart->add();
+$cart->remove();
