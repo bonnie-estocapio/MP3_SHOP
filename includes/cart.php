@@ -28,9 +28,10 @@ class Cart
         $total=0;
         $count=0;
         foreach ($_SESSION as $data => $value) {
-            if ($value == 1 && substr($data, 0, 8) === "product_") {
-                $id = substr($data, 8, strlen($data)-8);
+            if ($value === 1 && substr($data, 0, 8) === "product_") {
+                $id = substr($data, 8, strlen($data) - 8);
                 $query = $track->getQuery($id);
+
                 while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
                     $product = <<<DELIMETER
                         <tr>
