@@ -1,14 +1,18 @@
 <?php
 
-require_once 'includes/functions.php';
+require 'vendor/autoload.php';
 
 session_start();
+
 $functions = new Functions;
+$payment = new Payment;
+$message = new Message;
+
 $guest = $functions->state();
 
 
 if (isset($_POST['submit'])) {
-    $functions->paymentValidation($_POST);
+    $payment->validate($_POST);
 }
 ?>
 
@@ -50,7 +54,7 @@ if (isset($_POST['submit'])) {
                         <a href="checkout.php">Checkout</a>
                     </li>
                     <li>
-                        <a href="profile.php"><?=$functions->myHtmlspecialchars($_SESSION['user'] ??"", ENT_QUOTES);?></a>
+                        <a href="profile.php"><?php $functions->filter($_SESSION['user'] ??"", ENT_QUOTES);?></a>
                     </li>
                 </ul>
             </div>
@@ -64,7 +68,7 @@ if (isset($_POST['submit'])) {
             <div class="text-center">
 
                 <form method="post" action="payment.php">
-                <h3 class="text-center"><?php $functions->showMessage();?></h3>
+                <h3 class="text-center"><?php $message->show();?></h3>
                 <div class="col-50">
                     <h3>Payment</h3>
                 </div>
