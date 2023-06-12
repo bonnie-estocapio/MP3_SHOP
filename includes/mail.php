@@ -75,7 +75,7 @@ Class Mail
         }
 
         $query = $database->query("SELECT id FROM history ORDER BY id DESC LIMIT 1");
-        $orderID = mysqli_fetch_assoc($query);
+        $orderID = $query->fetch(PDO::FETCH_ASSOC);
         $body .="
                 with a total of $ {$total} for {$count} items.
                 
