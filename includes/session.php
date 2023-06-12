@@ -1,5 +1,6 @@
 <?php
-require_once 'includes/autoload.php';
+
+require 'vendor/autoload.php';
 
 Class Session
 {

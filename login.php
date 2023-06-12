@@ -1,6 +1,6 @@
 <?php
 
-require_once 'includes/autoload.php';
+require 'vendor/autoload.php';
 
 $message = new Message;
 $user = new User;
