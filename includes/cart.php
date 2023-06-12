@@ -1,6 +1,6 @@
 <?php
 
-require_once 'autoload.php';
+require 'vendor\autoload.php';
 
 class Cart
 {

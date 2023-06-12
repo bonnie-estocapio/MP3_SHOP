@@ -1,5 +1,7 @@
 <?php
 
+require 'vendor\autoload.php';
+
 Class UserData
 {
     public function owned()
@@ -8,7 +10,7 @@ Class UserData
         $database = new Database;
 
         foreach ($_SESSION as $data => $value) {
-            if ($value > 0 && substr($data, 0, 8)== "product_") {
+            if ($value > 0 && substr($data, 0, 8) == "product_") {
                 $id = substr($data, 8, strlen($data)-8);
                 $query = $database->query("SELECT * FROM tracks WHERE id =". $id);
                 while ($row = mysqli_fetch_assoc($query)) {
@@ -25,7 +27,7 @@ Class UserData
 
         $dataArray = [];
         foreach ($_SESSION as $data => $value) {
-            if ($value > 0 && substr($data, 0, 8)== "product_") {
+            if ($value > 0 && substr($data, 0, 8) == "product_") {
                 $id = substr($data, 8, strlen($data)-8);
                 $query = $database->query("SELECT * FROM tracks WHERE id =". $id);
                 while ($row = mysqli_fetch_assoc($query)) {
