@@ -61,7 +61,7 @@ Class User
 
         session_start();
         $userdata->write($_SESSION['user']);
-        $query = $database->query("DELETE FROM sessions");
+        $database->query("DELETE FROM sessions");
         $_SESSION = [];
         $ses_params = session_get_cookie_params();
         $options = array(
