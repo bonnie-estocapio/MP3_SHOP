@@ -6,34 +6,17 @@ use App\Operation\Database;
 
 Class UserData
 {
-    public function owned()
+    public function change($before, $after)
     {
         $userdata = new UserData;
         $database = new Database;
 
         foreach ($_SESSION as $data => $value) {
-            if ($value === "checkout" && substr($data, 0, 8) == "product_") {
+            if ($value === $before && substr($data, 0, 8) == "product_") {
                 $id = substr($data, 8, strlen($data)-8);
                 $query = $database->query("SELECT * FROM tracks WHERE id =". $id);
                 while ($row = $query->fetch(\PDO::FETCH_ASSOC)) {
-                    $_SESSION['product_'.$id] = "owned";
-                }
-            }
-        }
-        $userdata->write($_SESSION['user']);
-    }
-
-    public function checkout()
-    {
-        $userdata = new UserData;
-        $database = new Database;
-
-        foreach ($_SESSION as $data => $value) {
-            if ($value === "cart" && substr($data, 0, 8) == "product_") {
-                $id = substr($data, 8, strlen($data)-8);
-                $query = $database->query("SELECT * FROM tracks WHERE id =". $id);
-                while ($row = $query->fetch(\PDO::FETCH_ASSOC)) {
-                    $_SESSION['product_'.$id] = "checkout";
+                    $_SESSION['product_'.$id] = $after;
                 }
             }
         }
