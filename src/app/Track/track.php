@@ -30,7 +30,7 @@ class Track
     public function owned()
     {
         foreach($_SESSION as $data => $value) {
-            if($value == 2 && substr($data, 0, 8) == "product_") {
+            if($value === 'owned' && substr($data, 0, 8) == "product_") {
                     $id = substr($data, 8, strlen($data) - 8);
                     $this->display($id);
             }
@@ -74,14 +74,14 @@ class Track
                 </div>
             DELIMETER;
             echo $button;
-        } elseif ($_SESSION['product_'.$trackID] == 1) {
+        } elseif ($_SESSION['product_'.$trackID] === "cart") {
             $button = <<<DELIMETER
                         <a class="btn btn-primary" href="cart.php?remove={$trackID}">Remove from Cart</a>
                     </div>
                 </div>
             DELIMETER;
             echo $button;
-        } elseif ($_SESSION['product_'.$trackID] == 2) {
+        } elseif ($_SESSION['product_'.$trackID] === "owned") {
             $button = <<<DELIMETER
                         <a class="btn btn-primary" href="{$_SERVER['REQUEST_URI']}?path=../resources/tracks/{$data['title']}.mp3">Download</a>
                     </div>
