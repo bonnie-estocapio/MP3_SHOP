@@ -7,7 +7,5 @@
     <meta name="description" content="">
     <meta name="author" content="">
     
-    <link href="css/bootstrap.min.css" rel="stylesheet">
-    <link href="css/shop-homepage.css" rel="stylesheet">
-
- 
+    <link href="../resources/css/bootstrap.min.css" rel="stylesheet">
+    <link href="../resources/css/shop-homepage.css" rel="stylesheet">
