@@ -24,6 +24,7 @@ Class Order
     public function readLog($orderID, $username)
     {
         $dbase = new Database;
+
         if ($orderID === NULL) {
             $orderQuery = $dbase->query("SELECT id, data, date FROM history WHERE username = '{$username}'");
             while($row = $orderQuery->fetch(\PDO::FETCH_ASSOC)){
@@ -44,9 +45,10 @@ Class Order
         parse_str($orderData['data'], $orderArray);
 
         foreach ($orderArray as $data => $value) {
-            if ($value === 1 && substr($data, 0, 8) == "product_"){
+            if ($value === "checkout" && substr($data, 0, 8) == "product_") {
                 $id = substr($data, 8, strlen($data) - 8);
                 $trackQuery = $track->getQuery($id);
+
                 while($row = $trackQuery->fetch(\PDO::FETCH_ASSOC)) {
                     $order = <<<DELIMETER
                         <tr>
@@ -56,6 +58,7 @@ Class Order
                             <td>{$orderData['date']}</td>
                         </tr>
                     DELIMETER;
+
                     $this->total = $this->total + $row['price'];
                     $this->count++;
                     echo $order;
