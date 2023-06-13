@@ -9,7 +9,7 @@ use App\User\UserData;
 
 Class Payment
 {
-    public function pay($username, $total, $count)
+    public function pay($username, $total, $count): void
     {
         $mail = new Mail;
         $dbase = new Database;
@@ -28,10 +28,9 @@ Class Payment
         $_SESSION['total'] = 0;
     }
 
-    public function validate($paymentInfo)
+    public function validate($paymentInfo): void
     {
         $message = new Message;
-
         $check = 0;
 
         foreach ($paymentInfo as $data) {
