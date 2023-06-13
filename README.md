@@ -1,10 +1,13 @@
 # Music_Shop
 An online shop for mp3 files in which it can store and allow users to play it in their libraries. This project uses PHP.
+
 Version Check:
 PHP version = 8.2.
 mysqli = 8.2.0
 phpmyadmin Server version =  10.4.27-MariaDB - mariadb.org binary distribution 
 XAMPP Control Panel v3.3.0 (start Apache and MySQL Modules)
+
+Install autloader via Composer
 
 Generate App Password for PHPMailer
 1. Go to your Google Account.
