@@ -1,5 +1,11 @@
 {
     "autoload": {
-        "classmap": ["includes"]
+        "psr-4": {
+            "App\\Operation\\": "src/app/Operation",
+            "App\\Mail\\": "src/app/Mail",
+            "App\\Order\\": "src/app/Order",
+            "App\\User\\": "src/app/User",
+            "App\\Track\\": "src/app/Track"
+        }
     }
 }
