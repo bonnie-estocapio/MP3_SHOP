@@ -59,12 +59,12 @@ $guest = $functions->state();
             <tbody>
                 <tr class="cart-subtotal">
                 <th>Items:</th>
-                <td><span class="item"><?php $order->count; ?> </span></td>
+                <td><span class="item"><?php echo $order->count; ?> </span></td>
                 </tr>
 
                 <tr class="order-total">
                 <th>Order Total</th>
-                <td><strong><span class="amount">$ <?php $order->total; ?> </span></strong> </td>
+                <td><strong><span class="amount">$ <?php echo $order->total; ?> </span></strong> </td>
                 </tr>
             </tbody>
         </table>
