@@ -8,13 +8,12 @@ use App\Track\Track;
 
 require '../vendor/autoload.php';
 
-session_start();
-
 $functions = new Functions;
 $tracks = new Track;
 $message = new Message;
-$guest = $functions->state();
 
+session_start();
+$guest = $functions->state();
 $_POST['searchtext'] = '';
 ?>
 
@@ -29,15 +28,13 @@ $_POST['searchtext'] = '';
     <!-- Page Content -->
     <h3 class="text-center"><?php $message->show();?></h3>
     <div class="container">
-
         <div class="row">
-
             <div class="col-md-9">
                 <div class="row">
                     <?php
-                    if ($guest === true) {
+                    if ($guest) {
                         echo "Login to view Library";
-                    } elseif ($guest === false) {
+                    } else {
                         $tracks->owned();
                     }
                     ?>

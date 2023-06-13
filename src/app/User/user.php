@@ -17,7 +17,6 @@ Class User
         $navigation = new Navigation;
 
         if (isset($_POST['submit'])) {
-            // $connection = $this->db_connect();
             $username = $_POST['username'];
             $password = $_POST['password'];
 
