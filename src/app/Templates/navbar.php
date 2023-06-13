@@ -45,7 +45,7 @@ $guest = $functions->state();
                         <a href="logout.php">Logout</a>
                     </li>
                     <li>
-                        <a href="profile.php"><?php $_SESSION['user']; ?></a>
+                        <a href="profile.php"><?php echo $_SESSION['user']; ?></a>
                     </li>
                     <li>
                         <a href="orderHistory.php">Order History</a>
