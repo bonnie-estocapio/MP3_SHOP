@@ -48,9 +48,9 @@ $_POST['searchtext'] = '';
                         if ($guest === true) {
                             echo "Login to view";
                         } elseif ($guest === false) {
-                            if(!isset($_GET['orderID'])){
+                            if (!isset($_GET['orderID'])) {
                                 $order->readLog(NULL, $_SESSION['user']);
-                            } elseif(isset($_GET['orderID'])) { 
+                            } elseif (isset($_GET['orderID'])) { 
                                 $order->readLog($_GET['orderID'], $_SESSION['user']);
                             }
                         }
