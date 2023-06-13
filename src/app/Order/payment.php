@@ -19,11 +19,11 @@ Class Payment
         $query = $dbase->query("SELECT email FROM users WHERE username='{$username}'");
         $email = $query->fetch(\PDO::FETCH_ASSOC);
 
-        $userdata->checkout();
+        $userdata->change("cart", "checkout");
         $order->log($_SESSION);
         $body = $mail->setBody($total, $count);
         $mail->send($email['email'], $body);
-        $userdata->owned();
+        $userdata->change("checkout", "owned");
         $_SESSION['count'] = 0;
         $_SESSION['total'] = 0;
     }
@@ -39,6 +39,7 @@ Class Payment
                 $check = 1;
             }
         }
+
         if ($check === 1) {
             $message->set("Incomplete details. Try again.");
         } else {
