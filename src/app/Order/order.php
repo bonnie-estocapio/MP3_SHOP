@@ -11,7 +11,7 @@ Class Order
     public float $total = 0;
     public int $count = 0;
 
-    public function log($dataArray)
+    public function log($dataArray): void
     {
         $dbase = new Database;
         $dataString = http_build_query($dataArray);
@@ -21,7 +21,7 @@ Class Order
         }
     }
 
-    public function readLog($orderID, $username)
+    public function readLog($orderID, $username): void
     {
         $dbase = new Database;
 
@@ -38,7 +38,7 @@ Class Order
         }
     }
 
-    public function show($orderData)
+    public function show($orderData): void
     {
         $track = new Track;
         $orderArray = [];

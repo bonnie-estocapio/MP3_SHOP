@@ -4,7 +4,7 @@ namespace App\Operation;
 
 Class Message
 {
-    public function set($message)
+    public function set($message): void
     {
         if (!empty($message)) {
             $_SESSION['message'] = $message;
@@ -13,7 +13,7 @@ Class Message
         }
     }
 
-    public function show()
+    public function show(): void
     {
         if (isset($_SESSION['message'])) {
             echo $_SESSION['message'];

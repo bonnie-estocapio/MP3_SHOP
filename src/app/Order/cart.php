@@ -7,7 +7,7 @@ use App\Track\Track;
 
 class Cart
 {
-    public function add()
+    public function add(): void
     {
         $navigation = new Navigation();
         if (isset($_GET['add'])) {
@@ -16,7 +16,7 @@ class Cart
         }
     }
 
-    public function remove()
+    public function remove(): void
     {
         $navigation = new Navigation;
         if (isset($_GET['remove'])) {
@@ -25,7 +25,7 @@ class Cart
         }
     }
 
-    public function view()
+    public function view(): void
     {   
         $track = new Track;
         $total=0;

@@ -6,7 +6,7 @@ use App\Operation\Database;
 
 Class UserData
 {
-    public function change($before, $after)
+    public function change($before, $after): void
     {
         $userdata = new UserData;
         $database = new Database;
@@ -23,7 +23,7 @@ Class UserData
         $userdata->write($_SESSION['user']);
     }
 
-    public function write($username)
+    public function write($username): void
     {
         $database = new Database;
         $dataArray = [];
@@ -45,7 +45,7 @@ Class UserData
         }
     }
 
-    public function read()
+    public function read(): void
     {
         $database = new Database;
 

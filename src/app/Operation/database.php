@@ -15,7 +15,7 @@ Class Database
         $this->db_connect();
     }
 
-    public function db_connect()
+    public function db_connect(): void
     {
         try {
             $this->conn = new \PDO("mysql:host=" . $this->db_host . ";dbname=" . $this->db_name , $this->db_username, $this->db_password);
@@ -26,7 +26,7 @@ Class Database
         }
     }
 
-    public function query($sql)
+    public function query($sql): mixed
     {
         $query = $this->conn->prepare($sql);
         $query->execute();

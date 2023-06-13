@@ -6,7 +6,7 @@ Class Functions
 {
     private bool $guest = true;
 
-    public function filter($s, $flags=null)
+    public function filter($s, $flags=null): string
     {
         if (is_string($s))
         {
@@ -18,7 +18,7 @@ Class Functions
         }
     }
 
-    public function state()
+    public function state(): bool
     {
         $navigation = new Navigation;
         $location = $navigation->getCurrent();
@@ -26,8 +26,8 @@ Class Functions
             $guest = true;
             if (!isset($_SESSION['loggedin']) && $_SESSION['loggedin'] !== true) {
                 $guest = true;
-                for ($i = 1; $i<=9; $i++) {
-                    $_SESSION['product_'.$i] = 0;
+                for ($id = 1; $id<=9; $id++) {
+                    $_SESSION['product_'.$id] = 0;
                 }
                 $_SESSION['loggedin'] = false;
                 $_SESSION['user'] = 'Guest';
@@ -38,15 +38,5 @@ Class Functions
             $guest = true;
         }
         return $guest;
-    }
-
-    public function getID()
-    {
-
-    }
-
-    public function prefix()
-    {
-        
     }
 }
