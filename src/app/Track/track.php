@@ -9,7 +9,7 @@ class Track
     public function list($trackID): array
     {
         $database = new Database;
-        $query = $database->query("SELECT id, title, artist, year, album, genre,price FROM tracks WHERE id=$trackID");
+        $query = $database->query("SELECT id, title, artist, year, album, genre,price FROM tracks WHERE id = $trackID");
         $data = $query->fetch(\PDO::FETCH_ASSOC);
         return $data;
     }
@@ -17,7 +17,7 @@ class Track
     public function search($search, $category): void
     {
         $database = new Database;
-        $query = $database->query("SELECT id FROM tracks WHERE {$category}='{$search}'");
+        $query = $database->query("SELECT id FROM tracks WHERE {$category} = '{$search}'");
         if($query === null) {
             echo "Search result not Found";
         } else {
@@ -30,7 +30,7 @@ class Track
     public function owned(): void
     {
         foreach($_SESSION as $data => $value) {
-            if($value === 'owned' && substr($data, 0, 8) == "product_") {
+            if($value === 'owned' && substr($data, 0, 8) === "product_") {
                     $id = substr($data, 8, strlen($data) - 8);
                     $this->display($id);
             }

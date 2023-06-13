@@ -8,12 +8,9 @@ Class Functions
 
     public function filter($s, $flags=null): string
     {
-        if (is_string($s))
-        {
+        if (is_string($s)) {
             return($flags === null) ? htmlspecialchars($s) : htmlspecialchars($s, $flags);
-        }
-        else
-        {
+        } else {
             return "";
         }
     }
@@ -22,7 +19,7 @@ Class Functions
     {
         $navigation = new Navigation;
         $location = $navigation->getCurrent();
-        if($location !== '/Music_Shop/register.php'){
+        if ($location !== '/Music_Shop/register.php') {
             $guest = true;
             if (!isset($_SESSION['loggedin']) && $_SESSION['loggedin'] !== true) {
                 $guest = true;
@@ -31,8 +28,8 @@ Class Functions
                 }
                 $_SESSION['loggedin'] = false;
                 $_SESSION['user'] = 'Guest';
-                } elseif (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
-                $guest = false;
+            } elseif (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
+            $guest = false;
             }
         } else {
             $guest = true;

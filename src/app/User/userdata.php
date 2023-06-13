@@ -12,7 +12,7 @@ Class UserData
         $database = new Database;
 
         foreach ($_SESSION as $data => $value) {
-            if ($value === $before && substr($data, 0, 8) == "product_") {
+            if ($value === $before && substr($data, 0, 8) === "product_") {
                 $id = substr($data, 8, strlen($data)-8);
                 $query = $database->query("SELECT * FROM tracks WHERE id =". $id);
                 while ($row = $query->fetch(\PDO::FETCH_ASSOC)) {
@@ -29,7 +29,7 @@ Class UserData
         $dataArray = [];
 
         foreach ($_SESSION as $data => $value) {
-            if ($value != 0 && substr($data, 0, 8) == "product_") {
+            if ($value != 0 && substr($data, 0, 8) === "product_") {
                 $id = substr($data, 8, strlen($data) - 8);
                 $query = $database->query("SELECT * FROM tracks WHERE id =". $id);
                 while ($row = $query->fetch(\PDO::FETCH_ASSOC)) {
@@ -56,7 +56,7 @@ Class UserData
         parse_str($data['data'], $newArray);
         
         foreach ($newArray as $data => $value) {
-            if ($value > 0 && substr($data, 0, 8) == "product_") {
+            if ($value != 0 && substr($data, 0, 8) === "product_") {
                 $id = substr($data, 8, strlen($data) - 8);
                 $_SESSION['product_'.$id] = $newArray['product_'.$id];
             }

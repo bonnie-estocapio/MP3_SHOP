@@ -12,10 +12,15 @@ Class Order
     public int $count = 0;
 
     public function log($dataArray): void
-    {
+    {   
         $dbase = new Database;
+
+        $username = $_SESSION['user'];
+        $total = $_SESSION['total'];
+        $count = $_SESSION['count'];
         $dataString = http_build_query($dataArray);
-        $query = $dbase->query("INSERT INTO history (username, data, total, count) VALUES ('{$_SESSION['user']}', '{$dataString}', '{$_SESSION['total']}', '{$_SESSION['count']}')");
+        
+        $query = $dbase->query("INSERT INTO history (username, data, total, count) VALUES ('{$username}', '{$dataString}', '{$total}', '{$count}')");
         if (!$query) {
             echo "failed to input data";
         }
@@ -45,7 +50,7 @@ Class Order
         parse_str($orderData['data'], $orderArray);
 
         foreach ($orderArray as $data => $value) {
-            if ($value === "checkout" && substr($data, 0, 8) == "product_") {
+            if ($value === "checkout" && substr($data, 0, 8) === "product_") {
                 $id = substr($data, 8, strlen($data) - 8);
                 $trackQuery = $track->getQuery($id);
 
