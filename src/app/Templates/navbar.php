@@ -1,6 +1,10 @@
 <?php
 
-require 'vendor/autoload.php';
+namespace App\Templates;
+
+use App\Operation\Functions;
+
+require '../vendor/autoload.php';
 
 $functions = new Functions;
 $guest = $functions->state();

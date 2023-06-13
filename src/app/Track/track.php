@@ -1,6 +1,8 @@
 <?php
 
-require 'vendor/autoload.php';
+namespace App\Track;
+
+use App\Operation\Database;
 
 class Track
 {
@@ -8,7 +10,7 @@ class Track
     {
         $database = new Database;
         $query = $database->query("SELECT id, title, artist, year, album, genre,price FROM tracks WHERE id=$trackID");
-        $data = $query->fetch(PDO::FETCH_ASSOC);
+        $data = $query->fetch(\PDO::FETCH_ASSOC);
         return $data;
     }
 
@@ -19,7 +21,7 @@ class Track
         if($query === null) {
             echo "Search result not Found";
         } else {
-            while($row = $query->fetch(PDO::FETCH_ASSOC)) {
+            while($row = $query->fetch(\PDO::FETCH_ASSOC)) {
                 $this->display($row['id']);
             }
         }
@@ -27,10 +29,9 @@ class Track
 
     public function owned()
     {
-        $functions = new Functions;
         foreach($_SESSION as $data => $value) {
-            if($value == 2 && substr($data, 0, 8)== "product_") {
-                    $id = substr($data, 8, strlen($data)-8);
+            if($value == 2 && substr($data, 0, 8) == "product_") {
+                    $id = substr($data, 8, strlen($data) - 8);
                     $this->display($id);
             }
         }
@@ -54,7 +55,7 @@ class Track
         $track = <<<DELIMETER
             <div class="col-sm-4 col-lg-4 col-md-4">
                 <div class="thumbnail">
-                    <img src="images/{$data['album']}.jpg" alt="Album">
+                    <img src="../resources/images/{$data['album']}.jpg" alt="Album">
                     <div class="caption">
                         <h4 class="pull-right">$ {$data['price']}</h4>
                         <h4>{$data['title']}</h4>
@@ -82,8 +83,7 @@ class Track
             echo $button;
         } elseif ($_SESSION['product_'.$trackID] == 2) {
             $button = <<<DELIMETER
-                        <h5> In Library </h5>
-                        <a class="btn btn-primary" href="{$_SERVER['REQUEST_URI']}?path=tracks/{$data['title']}.mp3">Download</a>
+                        <a class="btn btn-primary" href="{$_SERVER['REQUEST_URI']}?path=../resources/tracks/{$data['title']}.mp3">Download</a>
                     </div>
                 </div>
             DELIMETER;
@@ -96,7 +96,7 @@ class Track
         $database = new Database;
         $count = 0;
         $query = $database->query("SELECT id FROM tracks");
-        while($row = $query->fetch(PDO::FETCH_ASSOC))
+        while($row = $query->fetch(\PDO::FETCH_ASSOC))
         {
             $count++;
         }

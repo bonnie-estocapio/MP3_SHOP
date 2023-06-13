@@ -1,6 +1,6 @@
 <?php
 
-require 'vendor/autoload.php';
+namespace App\Operation;
 
 Class Functions
 {

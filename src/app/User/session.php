@@ -1,6 +1,8 @@
 <?php
 
-require 'vendor\autoload.php';
+namespace App\User;
+
+use App\Operation\Database;
 
 Class Session
 {

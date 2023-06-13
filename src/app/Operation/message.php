@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Operation;
+
 Class Message
 {
     public function set($message)

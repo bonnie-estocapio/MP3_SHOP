@@ -1,6 +1,11 @@
 <?php
 
-require 'vendor\autoload.php';
+namespace App\Order;
+
+use App\Mail\Mail;
+use App\Operation\Database;
+use App\Operation\Message;
+use App\User\UserData;
 
 Class Payment
 {
@@ -11,7 +16,7 @@ Class Payment
         $userdata = new UserData;
 
         $query = $dbase->query("SELECT email FROM users WHERE username='{$username}'");
-        $email = $query->fetch(PDO::FETCH_ASSOC);
+        $email = $query->fetch(\PDO::FETCH_ASSOC);
 
         $body = $mail->setBody($total, $count);
         $mail->send($email['email'], $body);

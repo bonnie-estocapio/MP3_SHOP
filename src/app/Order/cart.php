@@ -1,12 +1,15 @@
 <?php
 
-require 'vendor\autoload.php';
+namespace App\Order;
+
+use App\Operation\Navigation;
+use App\Track\Track;
 
 class Cart
 {
     public function add()
     {
-        $navigation = new Navigation;
+        $navigation = new Navigation();
         if (isset($_GET['add'])) {
             $_SESSION['product_' . $_GET['add']]=1;
             $navigation->goTo("checkout.php");
@@ -32,7 +35,7 @@ class Cart
                 $id = substr($data, 8, strlen($data) - 8);
                 $query = $track->getQuery($id);
 
-                while ($row = $query->fetch(PDO::FETCH_ASSOC)) {
+                while ($row = $query->fetch(\PDO::FETCH_ASSOC)) {
                     $product = <<<DELIMETER
                         <tr>
                             <td>{$row['title']}</td>

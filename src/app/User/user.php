@@ -1,6 +1,10 @@
 <?php
 
-require 'vendor/autoload.php';
+namespace App\User;
+
+use App\Operation\Database;
+use App\Operation\Message;
+use App\Operation\Navigation;
 
 Class User
 {
@@ -18,16 +22,16 @@ Class User
             $password = $_POST['password'];
 
             $query = $database->query("SELECT id,username FROM users WHERE username = '{$username}' AND password = '{$password}'");
-            $data = $query->fetch(PDO::FETCH_ASSOC);
+            $data = $query->fetch(\PDO::FETCH_ASSOC);
 
             if (!$data) {
                 $message->set("Invalid Login Details");
             } else {
                 $_SESSION['loggedin'] = true;
                 $_SESSION['user'] = $username;
+                $userdata->read();
                 $session->write(session_id(), $_SESSION['user']);
                 $navigation->goTo("index.php");
-                $userdata->read();
             }
         }
     }

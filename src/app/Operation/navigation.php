@@ -1,5 +1,7 @@
 <?php
 
+namespace App\Operation;
+
 Class Navigation
 {
     public function getCurrent()
