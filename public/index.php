@@ -1,6 +1,10 @@
 <?php
 
-require 'vendor/autoload.php';
+namespace App\Public;
+
+use App\Operation\Functions;
+
+require '../vendor/autoload.php';
 
 $functions = new Functions;
 
@@ -10,11 +14,11 @@ $guest = $functions->state();
 
 ?>
 
-<?php include 'templates/header.php'; ?>
+<?php include '../src/app/Templates/header.php'; ?>
 <title>Home - Music Locker</title>
 
-<?php include 'templates/navbar.php'; ?>
+<?php include '../src/app/Templates/navbar.php'; ?>
 
     <h1 class='text-center'> WELCOME TO MUSIC LOCKER</h1>
 
-<?php include 'templates/footer.php'; ?>
+<?php include '../src/app/Templates/footer.php'; ?>

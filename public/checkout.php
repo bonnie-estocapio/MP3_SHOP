@@ -1,6 +1,11 @@
 <?php
 
-require 'vendor/autoload.php';
+namespace App\Public;
+
+use App\Operation\Functions;
+use App\Order\Cart;
+
+require '../vendor/autoload.php';
 
 session_start();
 
@@ -9,13 +14,13 @@ $cart = new Cart;
 $guest = $functions->state();
 ?>
 
-<?php include 'templates/header.php'; ?>
+<?php include '../src/app/Templates/header.php'; ?>
 <title>Checkout - Music Locker</title>
 </head>
 
 <body>
       <!-- Navigation -->
-      <?php include 'templates/navbar.php'; ?>
+      <?php include '../src/app/Templates/navbar.php'; ?>
     <!-- Page Content -->
     <div class="container">
     
@@ -76,4 +81,4 @@ $guest = $functions->state();
            <hr>
 
 
-<?php include 'templates/footer.php'; ?>
+<?php include '../src/app/Templates/footer.php'; ?>

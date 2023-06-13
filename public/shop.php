@@ -1,6 +1,11 @@
 <?php
 
-require 'vendor/autoload.php';
+namespace App\Public;
+
+use App\Operation\Functions;
+use App\Track\Track;
+
+require '../vendor/autoload.php';
 
 session_start();
 
@@ -9,13 +14,13 @@ $tracks = new Track;
 $guest = $functions->state();
 ?>
 
-<?php include 'templates/header.php'; ?>
+<?php include '../src/app/Templates/header.php'; ?>
 <title>Shop - Music Locker</title>
 </head>
 
 <body>
     <!-- Navigation -->
-<?php include 'templates/navbar.php'; ?>
+    <?php include '../src/app/Templates/navbar.php'; ?>
 
     <!-- Page Content -->
     
@@ -69,4 +74,4 @@ $guest = $functions->state();
     <div class="container">
 
         <hr>
-<?php include 'templates/footer.php'; ?>
+<?php include '../src/app/Templates/footer.php'; ?>

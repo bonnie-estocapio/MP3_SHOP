@@ -1,6 +1,11 @@
 <?php
 
-require_once 'includes/autoload.php';
+namespace App\Public;
+
+use App\Operation\Message;
+use App\User\User;
+
+require '../vendor/autoload.php';
 
 $user = new User;
 $message = new Message;
@@ -26,12 +31,12 @@ if (isset($_POST['submit'])) {
 }
 ?>
 
-<?php include 'templates/header.php'; ?>
+<?php include '../src/app/Templates/header.php'; ?>
 <title>Register - Music Locker</title>
 </head>
 
 <body>
-<?php include 'templates/navbar.php'; ?>
+<?php include '../src/app/Templates/navbar.php'; ?>
 
     <!-- Page Content -->
     <div class="container">
@@ -73,4 +78,4 @@ if (isset($_POST['submit'])) {
     </div>
     <div class="container">
         <hr>
-<?php include 'templates/footer.php'; ?>
+<?php include '../src/app/Templates/footer.php'; ?>
