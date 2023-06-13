@@ -6,7 +6,7 @@ use App\Operation\Database;
 
 class Track
 {
-    public function list($trackID)
+    public function list($trackID): array
     {
         $database = new Database;
         $query = $database->query("SELECT id, title, artist, year, album, genre,price FROM tracks WHERE id=$trackID");
@@ -14,7 +14,7 @@ class Track
         return $data;
     }
 
-    public function search($search, $category)
+    public function search($search, $category): void
     {
         $database = new Database;
         $query = $database->query("SELECT id FROM tracks WHERE {$category}='{$search}'");
@@ -27,7 +27,7 @@ class Track
         }
     }
 
-    public function owned()
+    public function owned(): void
     {
         foreach($_SESSION as $data => $value) {
             if($value === 'owned' && substr($data, 0, 8) == "product_") {
@@ -37,7 +37,7 @@ class Track
         }
     }
 
-    public function all()
+    public function all(): void
     {
         $count = 1;
         $trackTotal = $this->count();                    
@@ -47,7 +47,7 @@ class Track
         }
     }
     
-    public function display($trackID)
+    public function display($trackID): void
     {
         $download = new Download;
         $download->downloadTrack();
@@ -91,7 +91,7 @@ class Track
         }
     }
 
-    public function count()
+    public function count(): int
     {
         $database = new Database;
         $count = 0;
@@ -103,7 +103,7 @@ class Track
         return $count;
     }
 
-    public function getQuery($id)
+    public function getQuery($id): mixed
     {
         $database = new Database;
         $query = $database->query("SELECT * FROM tracks WHERE id =". $id);

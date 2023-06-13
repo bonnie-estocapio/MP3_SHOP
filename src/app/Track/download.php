@@ -6,7 +6,7 @@ use App\Operation\Message;
 
 class Download
 {
-    public function downloadTrack()
+    public function downloadTrack(): void
     {
         $message = new Message;
 

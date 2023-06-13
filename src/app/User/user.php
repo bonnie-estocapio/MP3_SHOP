@@ -8,7 +8,7 @@ use App\Operation\Navigation;
 
 Class User
 {
-    public function login()
+    public function login(): void
     {
         $database = new Database;
         $userdata = new UserData;
