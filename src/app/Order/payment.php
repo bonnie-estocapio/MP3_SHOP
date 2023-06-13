@@ -14,13 +14,15 @@ Class Payment
         $mail = new Mail;
         $dbase = new Database;
         $userdata = new UserData;
+        $order = new Order;
 
         $query = $dbase->query("SELECT email FROM users WHERE username='{$username}'");
         $email = $query->fetch(\PDO::FETCH_ASSOC);
 
+        $userdata->checkout();
+        $order->log($_SESSION);
         $body = $mail->setBody($total, $count);
         $mail->send($email['email'], $body);
-
         $userdata->owned();
         $_SESSION['count'] = 0;
         $_SESSION['total'] = 0;
