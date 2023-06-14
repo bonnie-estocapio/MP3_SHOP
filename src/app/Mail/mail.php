@@ -29,7 +29,7 @@ class Mail
             $mail->addAddress($email);
             $mail->isHTML(true);
 
-            $mail->Subject = 'Order from Music locker';
+            $mail->Subject = 'Order from Music locker - ' . date('F d, Y');;
             $mail->Body = $body;
 
             if ($mail->send()) {
