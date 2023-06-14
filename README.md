@@ -23,6 +23,6 @@ Generate App Password for PHPMailer
 
 How to use:
 1. Copy files to localhost root (C:\xampp\htdocs\)
-2. Open https://localhost/Music_Shop/ in browser.
+2. Open https://localhost/Music_Shop/public in browser to start using the website.
 3. Please register with valid and working email.
 4. Use website as intended
