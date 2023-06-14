@@ -31,16 +31,38 @@ Class Payment
     public function validate($paymentInfo): void
     {
         $message = new Message;
-        $check = 0;
 
-        foreach ($paymentInfo as $data) {
-            if ($data === '') {
-                $check = 1;
-            }
+        $cardName = $paymentInfo['name'];
+        $cardNumber = preg_replace('/\D/', '', $paymentInfo['ccnum']);
+        $cardCVV = preg_replace('/\D/', '', $paymentInfo['cvv']);
+        $expiry = $paymentInfo['expiry'];
+        $valid = true;
+
+        $currentYear = date('y');
+        $currentMonth = date('m');
+        $expiryMonth = substr($expiry, 0, 2);
+        $expiryYear = substr($expiry, 3, 2);
+
+        if (empty($name) || !preg_match('/^[a-zA-Z\s]+$/', $cardName)) {
+            $valid = false;
         }
 
-        if ($check === 1) {
-            $message->set("Incomplete details. Try again.");
+        if (!preg_match('/^4[0-9]{12}(?:[0-9]{3})?$/', $cardNumber)) {
+            $valid = false;
+        }
+
+        if (!preg_match('/^\d{3,4}$/', $cardCVV)) {
+            $valid = false;
+        }
+
+        if ($expiryYear < $currentYear || ($expiryYear == $currentYear && $expiryMonth <= $currentMonth)) {
+            $valid = false;
+        }
+
+        if (!$valid) {
+            $message->set("Invalid Card Details. Try again.");
+        } elseif (!isset($paymentInfo['tos'])) {
+            $message->set("Please agree on Terms of Service");
         } else {
             $this->pay($_SESSION['user'], $_SESSION['total'], $_SESSION['count']);
         }
