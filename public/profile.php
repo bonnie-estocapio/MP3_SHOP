@@ -8,11 +8,12 @@ use App\Track\Track;
 
 require '../vendor/autoload.php';
 
+session_start();
+
 $functions = new Functions;
 $tracks = new Track;
 $message = new Message;
 
-session_start();
 $guest = $functions->state();
 $_POST['searchtext'] = '';
 ?>

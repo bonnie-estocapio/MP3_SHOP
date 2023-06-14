@@ -8,11 +8,12 @@ use App\User\User;
 
 require '../vendor/autoload.php';
 
+session_start();
+
 $message = new Message;
 $user = new User;
 $navigation = new Navigation;
 
-session_start();
 $user->login();
 
 if (isset($_POST['signup'])) {

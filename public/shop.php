@@ -11,6 +11,7 @@ session_start();
 
 $functions = new Functions;
 $tracks = new Track;
+
 $guest = $functions->state();
 ?>
 

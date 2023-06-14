@@ -8,11 +8,12 @@ use App\Operation\Functions;
 
 require '../vendor/autoload.php';
 
+session_start();
+
 $functions = new Functions;
 $payment = new Payment;
 $message = new Message;
 
-session_start();
 $guest = $functions->state();
 
 if (isset($_POST['submit'])) {

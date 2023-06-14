@@ -6,9 +6,9 @@ use App\Operation\Functions;
 
 require '../vendor/autoload.php';
 
-$functions = new Functions;
-
 session_start();
+
+$functions = new Functions;
 
 $guest = $functions->state();
 ?>

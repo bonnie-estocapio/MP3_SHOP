@@ -8,6 +8,7 @@ use App\Order\Cart;
 require '../vendor/autoload.php';
 
 session_start();
+
 $functions = new Functions;
 $cart = new Cart;
 
