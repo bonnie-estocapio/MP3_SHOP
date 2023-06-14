@@ -41,16 +41,16 @@ if (isset($_POST['submit'])) {
                         <h3>Payment</h3>
                     </div>
                     <div class="text-center">
-                            <label for="cname">Name on Card</label>
-                            <input type="text" id="cname" name="cardname" placeholder="John More Doe">
+                            <label for="name">Name on Card</label>
+                            <input type="text" id="name" name="name" placeholder="John More Doe">
                     </div>
                     <div class="text-center">
                         <label for="ccnum">Credit card number</label>
-                        <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
+                        <input type="text" id="ccnum" name="ccnum" placeholder="1111-2222-3333-4444">
                     </div>
                     <div class="text-center">
                         <label for="exp">Expiry</label>
-                        <input type="text" id="expmonth" name="expmonth" placeholder="03-25">
+                        <input type="text" id="expiry" name="expiry" placeholder="03-25">
                     </div>
                     <div class="col-50">
                         <label for="cvv">CVV</label>
