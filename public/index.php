@@ -7,10 +7,6 @@ use App\Operation\Functions;
 require '../vendor/autoload.php';
 
 session_start();
-
-$functions = new Functions;
-
-$guest = $functions->state();
 ?>
 
 <?php include '../src/app/Templates/header.php'; ?>
