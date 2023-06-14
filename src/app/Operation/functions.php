@@ -21,7 +21,7 @@ Class Functions
         $location = $navigation->getCurrent();
         if ($location !== '/Music_Shop/register.php') {
             $guest = true;
-            if (!isset($_SESSION['loggedin']) && $_SESSION['loggedin'] !== true) {
+            if (!isset($_SESSION['loggedin'])) {
                 $guest = true;
                 for ($id = 1; $id<=9; $id++) {
                     $_SESSION['product_'.$id] = 0;
