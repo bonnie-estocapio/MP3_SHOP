@@ -35,6 +35,7 @@ Class User
                 $userdata->read();
                 $session->write(session_id(), $_SESSION['user']);
                 $navigation->goTo("index.php");
+                $session->setExpiry(60);
             }
         }
     }

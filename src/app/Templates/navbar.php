@@ -3,10 +3,13 @@
 namespace App\Templates;
 
 use App\Operation\Functions;
+use App\User\Session;
 
 require '../vendor/autoload.php';
 
 $functions = new Functions;
+$session = new Session;
+
 $guest = $functions->state();
 ?>
 
