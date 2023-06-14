@@ -2,13 +2,13 @@
 
 namespace App\Operation;
 
-Class Navigation
+class Navigation
 {
     public function getCurrent(): string
     {
         return $_SERVER['REQUEST_URI'];
     }
-    
+
     public function goTo($location): void
     {
         header("Location: {$location}");

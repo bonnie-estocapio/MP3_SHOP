@@ -2,9 +2,9 @@
 
 namespace App\Public;
 
-require '../vendor/autoload.php';
-
 use App\User\User;
+
+require '../vendor/autoload.php';
 
 $user = new User;
 

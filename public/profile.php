@@ -27,7 +27,7 @@ $_POST['searchtext'] = '';
     <?php include '../src/app/Templates/navbar.php'; ?>
 
     <!-- Page Content -->
-    <h3 class="text-center"><?php $message->show();?></h3>
+    <h3 class="text-center"><?php $message->show(); ?></h3>
     <div class="container">
         <div class="row">
             <div class="col-md-9">
@@ -44,6 +44,5 @@ $_POST['searchtext'] = '';
         </div>
     </div>
     <div class="container">
-
         <hr>
-<?php include '../src/app/Templates/footer.php'; ?>
+        <?php include '../src/app/Templates/footer.php'; ?>

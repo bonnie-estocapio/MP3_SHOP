@@ -7,7 +7,7 @@ use App\Operation\Database;
 use App\Operation\Message;
 use App\User\UserData;
 
-Class Payment
+class Payment
 {
     public function pay($username, $total, $count): void
     {
@@ -43,7 +43,7 @@ Class Payment
         $expiryMonth = substr($expiry, 0, 2);
         $expiryYear = substr($expiry, 3, 2);
 
-        if (empty($name) || !preg_match('/^[a-zA-Z\s]+$/', $cardName)) {
+        if (empty($cardName) || !preg_match('/^[a-zA-Z\s]+$/', $cardName)) {
             $valid = false;
         }
 
@@ -62,7 +62,7 @@ Class Payment
         if (!$valid) {
             $message->set("Invalid Card Details. Try again.");
         } elseif (!isset($paymentInfo['tos'])) {
-            $message->set("Please agree on Terms of Service");
+            $message->set("Please agree to the Terms of Service");
         } else {
             $this->pay($_SESSION['user'], $_SESSION['total'], $_SESSION['count']);
         }

@@ -38,37 +38,37 @@ $guest = $functions->state();
                         </tr>
                     </thead>
                     <tbody>
-                            <?php
-                            if ($guest) {
-                                echo "Login to view";
-                            } elseif (!$guest && !isset($_GET['orderID'])) {
-                                $order->readLog(NULL, $_SESSION['user']);
-                            } elseif (!$guest && isset($_GET['orderID'])) { 
-                                $order->readLog($_GET['orderID'], $_SESSION['user']);
-                            }
-                            ?>
+                        <?php
+                        if ($guest) {
+                            echo "Login to view";
+                        } elseif (!$guest && !isset($_GET['orderID'])) {
+                            $order->readLog(null, $_SESSION['user']);
+                        } elseif (!$guest && isset($_GET['orderID'])) { 
+                            $order->readLog($_GET['orderID'], $_SESSION['user']);
+                        }
+                        ?>
                     </tbody>
                 </table>
                 <a class="btn btn-primary" href="profile.php">Back to Profile</a>
             </form>
 
-    <!--  ***********CART TOTALS*************-->
-    <div class="col-xs-4 pull-right ">
-        <h2>Order Summary</h2>
-        <table class="table table-bordered" cellspacing="0">
-            <tbody>
-                <tr class="cart-subtotal">
-                <th>Items:</th>
-                <td><span class="item"><?php echo $order->count; ?> </span></td>
-                </tr>
+            <div class="col-xs-4 pull-right">
+                <h2>Order Summary</h2>
+                <table class="table table-bordered" cellspacing="0">
+                    <tbody>
+                        <tr class="cart-subtotal">
+                            <th>Items:</th>
+                            <td><span class="item"><?php echo $order->count; ?> </span></td>
+                        </tr>
 
-                <tr class="order-total">
-                <th>Order Total</th>
-                <td><strong><span class="amount">$ <?php echo $order->total; ?> </span></strong> </td>
-                </tr>
-            </tbody>
-        </table>
+                        <tr class="order-total">
+                            <th>Order Total</th>
+                            <td><strong><span class="amount">$ <?php echo $order->total; ?> </span></strong> </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
-</div>
-<hr>
+    <hr>
 <?php include '../src/app/Templates/footer.php'; ?>

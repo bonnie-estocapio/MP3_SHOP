@@ -35,34 +35,34 @@ $guest = $functions->state();
                         </tr>
                     </thead>
                     <tbody>
-                    <?php $cart->view(); ?>
+                        <?php $cart->view(); ?>
                     </tbody>
                 </table>
                 <a class="btn btn-primary" href="shop.php">Continue Shopping</a>
             </form>
 
-            <div class="col-xs-4 pull-right ">
+            <div class="col-xs-4 pull-right">
                 <h2>Cart Totals</h2>
                 <table class="table table-bordered" cellspacing="0">
                     <tbody>   
                         <tr class="cart-subtotal">
-                        <th>Items:</th>
-                        <td><span class="amount"><?=$_SESSION['count']?></span></td>
+                            <th>Items:</th>
+                            <td><span class="amount"><?=$_SESSION['count']?></span></td>
                         </tr>
                         
                         <tr class="shipping">
-                        <th>Shipping and Handling</th>
-                        <td>Free Shipping</td>
+                            <th>Shipping and Handling</th>
+                            <td>Free Shipping</td>
                         </tr>
 
                         <tr class="order-total">
-                        <th>Order Total</th>
-                        <td><strong><span class="amount"><?=$_SESSION['total']?></span></strong> </td>
+                            <th>Order Total</th>
+                            <td><strong><span class="amount"><?=$_SESSION['total']?></span></strong> </td>
                         </tr>
                     </tbody>
                 </table>
                 <a class="btn btn-primary" href="payment.php">Proceed to Payment</a>
             </div>
         </div>
-<hr>
-<?php include '../src/app/Templates/footer.php'; ?>
+        <hr>
+        <?php include '../src/app/Templates/footer.php'; ?>

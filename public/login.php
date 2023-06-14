@@ -42,9 +42,9 @@ if (isset($_POST['signup'])) {
                     </div>
 
                     <div class="form-group">
-                    <input type="submit" name="submit" value="submit" class="btn btn-primary" >
-                    <h5>No account yet? Sign up here:</h5>
-                    <input type="submit" name="signup" value="signup" class="btn btn-primary" >
+                        <input type="submit" name="submit" value="submit" class="btn btn-primary">
+                        <h5>No account yet? Sign up here:</h5>
+                        <input type="submit" name="signup" value="signup" class="btn btn-primary">
                     </div>
                 </form>
             </div>  

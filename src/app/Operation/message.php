@@ -2,7 +2,7 @@
 
 namespace App\Operation;
 
-Class Message
+class Message
 {
     public function set($message): void
     {

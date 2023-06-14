@@ -20,28 +20,24 @@ $guest = $functions->state();
 </head>
 
 <body>
-    <!-- Navigation -->
     <?php include '../src/app/Templates/navbar.php'; ?>
 
     <!-- Page Content -->
-    
     <div class="container">
         <div class="search">
             <form method="post">
                 <input type="text" name="searchtext" placeholder="Search here">
                 <input type="radio" name="category" value="title"> Title
                 <input type="radio" name="category" value="artist"> Artist
-                <input type="radio" name="category" value="album"> Album 
+                <input type="radio" name="category" value="album"> Album
                 <input type="radio" name="category" value="year"> Year
                 <input type="radio" name="category" value="genre"> Genre
                 <input type="submit" name="search" value="search">
             </form>
         </div>
         <div class="row">
-
             <div class="col-md-9">
                 <div class="row">
-
                     <!-- TRACK 1 -->
                     <?php
                     if (!isset($_POST['search'])) {
@@ -60,11 +56,9 @@ $guest = $functions->state();
                         }
                     } elseif (isset($_POST['search']) && !isset($_POST['category'])) {
                         echo
-                        "
-                        <script>
+                        "<script>
                         alert('Category not Set');
-                        </script>
-                        ";
+                        </script>";
                         $tracks->all();
                     }
                     ?>
@@ -73,6 +67,5 @@ $guest = $functions->state();
         </div>
     </div>
     <div class="container">
-
         <hr>
-<?php include '../src/app/Templates/footer.php'; ?>
+        <?php include '../src/app/Templates/footer.php'; ?>
