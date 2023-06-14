@@ -17,8 +17,8 @@ Class User
         $navigation = new Navigation;
 
         if (isset($_POST['submit'])) {
-            $username = $_POST['username'];
-            $password = $_POST['password'];
+            $username = $database->conn->quote($_POST['username']);
+            $password = $database->conn->quote($_POST['password']);
 
             $query = $database->query("SELECT id,username FROM users WHERE username = '{$username}' AND password = '{$password}'");
             $data = $query->fetch(\PDO::FETCH_ASSOC);
