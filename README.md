@@ -7,7 +7,7 @@ mysqli = 8.2.0
 phpmyadmin Server version =  10.4.27-MariaDB - mariadb.org binary distribution 
 XAMPP Control Panel v3.3.0 (start Apache and MySQL Modules)
 
-Install autloader via Composer
+Install autoloader via Composer
 
 Generate App Password for PHPMailer
 1. Go to your Google Account.
