@@ -3,18 +3,19 @@
 namespace App\User;
 
 use App\Operation\Database;
+use App\Track\Track;
 
 Class UserData
 {
     public function change($before, $after): void
     {
         $userdata = new UserData;
-        $database = new Database;
+        $track = new Track;
 
         foreach ($_SESSION as $data => $value) {
             if ($value === $before && substr($data, 0, 8) === "product_") {
-                $id = substr($data, 8, strlen($data)-8);
-                $query = $database->query("SELECT * FROM tracks WHERE id =". $id);
+                $id = substr($data, 8);
+                $query = $track->getQuery($id);
                 while ($row = $query->fetch(\PDO::FETCH_ASSOC)) {
                     $_SESSION['product_'.$id] = $after;
                 }
@@ -26,12 +27,13 @@ Class UserData
     public function write($username): void
     {
         $database = new Database;
+        $track = new Track;
         $dataArray = [];
 
         foreach ($_SESSION as $data => $value) {
             if ($value != 0 && substr($data, 0, 8) === "product_") {
-                $id = substr($data, 8, strlen($data) - 8);
-                $query = $database->query("SELECT * FROM tracks WHERE id =". $id);
+                $id = substr($data, 8);
+                $query = $track->getQuery($id);
                 while ($row = $query->fetch(\PDO::FETCH_ASSOC)) {
                     $dataArray['product_' . $id] = $_SESSION['product_' . $id];
                 }
@@ -57,7 +59,7 @@ Class UserData
         
         foreach ($newArray as $data => $value) {
             if ($value != 0 && substr($data, 0, 8) === "product_") {
-                $id = substr($data, 8, strlen($data) - 8);
+                $id = substr($data, 8);
                 $_SESSION['product_'.$id] = $newArray['product_'.$id];
             }
         }

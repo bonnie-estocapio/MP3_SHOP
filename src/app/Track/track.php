@@ -31,8 +31,8 @@ class Track
     {
         foreach($_SESSION as $data => $value) {
             if($value === 'owned' && substr($data, 0, 8) === "product_") {
-                    $id = substr($data, 8, strlen($data) - 8);
-                    $this->display($id);
+                $id = substr($data, 8);
+                $this->display($id);
             }
         }
     }
