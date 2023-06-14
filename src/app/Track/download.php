@@ -28,6 +28,5 @@ class Download
                 $message->set("File does not exist.");
             }
         }
-        
     }
 }
