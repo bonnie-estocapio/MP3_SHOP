@@ -2,6 +2,7 @@
 
 namespace App\Track;
 
+use App\Operation\Database;
 use App\Operation\Message;
 
 class Download
@@ -9,12 +10,14 @@ class Download
     public function downloadTrack(): void
     {
         $message = new Message;
+        $database = new Database;
 
-
-        if (isset($_GET['path'])) {
+        if (isset($_GET['id'])) {
             $id = $_GET['id'];
             $owned = $this->checkIfOwned($id);
-            $filename = $_GET['path'];
+            $query = $database->query("SELECT title from tracks WHERE id = " . $id);
+            $data = $query->fetch(\PDO::FETCH_ASSOC);
+            $filename = "../resources/tracks/{$data['title']}.mp3";
 
             if (file_exists($filename) && $owned === true) {
                 header('Content-Description: File Transfer');
@@ -28,6 +31,8 @@ class Download
                 readfile($filename);
 
                 die();
+            } else {
+                $message->set("No permission to download");
             }
         }
     }
