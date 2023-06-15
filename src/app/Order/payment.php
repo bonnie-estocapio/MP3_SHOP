@@ -41,21 +41,21 @@ class Payment
         $expiryMonth = substr($expiry, 0, 2);
         $expiryYear = substr($expiry, 3, 2);
 
-        // if (empty($cardName) || !preg_match('/^[a-zA-Z\s]+$/', $cardName)) {
-        //     $valid = false;
-        // }
+        if (empty($cardName) || !preg_match('/^[a-zA-Z\s]+$/', $cardName)) {
+            $valid = false;
+        }
 
-        // if (!preg_match('/^4[0-9]{12}(?:[0-9]{3})?$/', $cardNumber)) {
-        //     $valid = false;
-        // }
+        if (!preg_match('/^4[0-9]{12}(?:[0-9]{3})?$/', $cardNumber)) {
+            $valid = false;
+        }
 
-        // if (!preg_match('/^\d{3,4}$/', $cardCVV)) {
-        //     $valid = false;
-        // }
+        if (!preg_match('/^\d{3,4}$/', $cardCVV)) {
+            $valid = false;
+        }
 
-        // if ($expiryYear < $currentYear || ($expiryYear == $currentYear && $expiryMonth <= $currentMonth)) {
-        //     $valid = false;
-        // }
+        if ($expiryYear < $currentYear || ($expiryYear == $currentYear && $expiryMonth <= $currentMonth)) {
+            $valid = false;
+        }
 
         if (!$valid) {
             $message->set("Invalid Card Details. Try again.");
