@@ -4,7 +4,6 @@ namespace App\Mail;
 
 use App\Operation\Database;
 use App\Operation\Message;
-use App\Operation\Navigation;
 use App\User\UserData;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
