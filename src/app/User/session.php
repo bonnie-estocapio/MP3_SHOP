@@ -19,9 +19,9 @@ Class Session
         }
     }
 
-    public function setExpiry($sec)
+    public function setExpiry()
     {
-        $expiration = $sec;
+        $expiration = 3600;
         $_SESSION['expiration'] = time() + $expiration;
     }
 
@@ -32,7 +32,7 @@ Class Session
         if (isset($_SESSION['expiration']) && $_SESSION['expiration'] < time()) {
             $user->logout();
         } else {
-            $this->setExpiry(60);
+            $this->setExpiry();
         }
     }
 }
