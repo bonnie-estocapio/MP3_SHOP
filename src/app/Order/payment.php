@@ -16,7 +16,6 @@ class Payment
         $userdata = new UserData;
         $order = new Order;
 
-        $success = true;
         $query = $dbase->query("SELECT email FROM users WHERE username='{$username}'");
         $email = $query->fetch(\PDO::FETCH_ASSOC);
 
