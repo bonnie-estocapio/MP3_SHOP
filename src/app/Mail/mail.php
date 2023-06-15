@@ -18,7 +18,6 @@ class Mail
     public function send($email, $body): void
     {
         $userdata = new UserData;
-        $navigation = new Navigation;
         $message = new Message;
 
         try {
