@@ -68,25 +68,25 @@ class Track
         echo $track;
 
         if ($_SESSION['product_'.$trackID] == 0) {
-            $button = <<<DELIMETER
+            $button = <<<DELIMITER
                         <a class="btn btn-primary" href="cart.php?add={$trackID}">Add to Cart</a>
                     </div>
                 </div>
-            DELIMETER;
+            DELIMITER;
             echo $button;
         } elseif ($_SESSION['product_'.$trackID] === "cart") {
-            $button = <<<DELIMETER
+            $button = <<<DELIMITER
                         <a class="btn btn-primary" href="cart.php?remove={$trackID}">Remove from Cart</a>
                     </div>
                 </div>
-            DELIMETER;
+            DELIMITER;
             echo $button;
         } elseif ($_SESSION['product_'.$trackID] === "owned") {
-            $button = <<<DELIMETER
+            $button = <<<DELIMITER
                         <a class="btn btn-primary" href="{$_SERVER['REQUEST_URI']}?path=../resources/tracks/{$data['title']}.mp3">Download</a>
                     </div>
                 </div>
-            DELIMETER;
+            DELIMITER;
             echo $button;
         }
     }
