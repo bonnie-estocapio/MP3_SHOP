@@ -16,6 +16,7 @@ class Payment
         $userdata = new UserData;
         $order = new Order;
 
+        $success = true;
         $query = $dbase->query("SELECT email FROM users WHERE username='{$username}'");
         $email = $query->fetch(\PDO::FETCH_ASSOC);
 
@@ -23,9 +24,6 @@ class Payment
         $order->log($_SESSION);
         $body = $mail->setBody($total, $count);
         $mail->send($email['email'], $body);
-        $userdata->change("checkout", "owned");
-        $_SESSION['count'] = 0;
-        $_SESSION['total'] = 0;
     }
 
     public function validate($paymentInfo): void
@@ -43,21 +41,21 @@ class Payment
         $expiryMonth = substr($expiry, 0, 2);
         $expiryYear = substr($expiry, 3, 2);
 
-        if (empty($cardName) || !preg_match('/^[a-zA-Z\s]+$/', $cardName)) {
-            $valid = false;
-        }
+        // if (empty($cardName) || !preg_match('/^[a-zA-Z\s]+$/', $cardName)) {
+        //     $valid = false;
+        // }
 
-        if (!preg_match('/^4[0-9]{12}(?:[0-9]{3})?$/', $cardNumber)) {
-            $valid = false;
-        }
+        // if (!preg_match('/^4[0-9]{12}(?:[0-9]{3})?$/', $cardNumber)) {
+        //     $valid = false;
+        // }
 
-        if (!preg_match('/^\d{3,4}$/', $cardCVV)) {
-            $valid = false;
-        }
+        // if (!preg_match('/^\d{3,4}$/', $cardCVV)) {
+        //     $valid = false;
+        // }
 
-        if ($expiryYear < $currentYear || ($expiryYear == $currentYear && $expiryMonth <= $currentMonth)) {
-            $valid = false;
-        }
+        // if ($expiryYear < $currentYear || ($expiryYear == $currentYear && $expiryMonth <= $currentMonth)) {
+        //     $valid = false;
+        // }
 
         if (!$valid) {
             $message->set("Invalid Card Details. Try again.");

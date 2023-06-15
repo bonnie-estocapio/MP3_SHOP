@@ -3,6 +3,9 @@
 namespace App\Mail;
 
 use App\Operation\Database;
+use App\Operation\Message;
+use App\Operation\Navigation;
+use App\User\UserData;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
@@ -12,38 +15,41 @@ require 'phpmailer/src/SMTP.php';
 
 class Mail
 {
-    public function send($email, $body): bool
+    public function send($email, $body): void
     {
-        if (isset($_POST['submit'])) {
-            $mail = new PHPMailer(true);
+        $userdata = new UserData;
+        $navigation = new Navigation;
+        $message = new Message;
 
-            $mail->isSMTP();
-            $mail->Host = 'smtp.gmail.com';
-            $mail->SMTPAuth = true;
-            $mail->Username = '';
-            $mail->Password = '';
-            $mail->SMTPSecure = 'ssl';
-            $mail->Port = 465;
-
-            $mail->setFrom('');
-            $mail->addAddress($email);
-            $mail->isHTML(true);
-
-            $mail->Subject = 'Order from Music locker - ' . date('F d, Y');;
-            $mail->Body = $body;
-
-            if ($mail->send()) {
+        try {
+            if (isset($_POST['submit'])) {
+                $mail = new PHPMailer(true);
+    
+                $mail->isSMTP();
+                $mail->Host = 'smtp.gmail.com';
+                $mail->SMTPAuth = true;
+                $mail->Username = '';
+                $mail->Password = '';
+                $mail->SMTPSecure = 'ssl';
+                $mail->Port = 465;
+    
+                $mail->setFrom('');
+                $mail->addAddress($email);
+                $mail->isHTML(true);
+    
+                $mail->Subject = 'Order from Music locker - ' . date('F d, Y');;
+                $mail->Body = $body;
                 echo "<script>
                     alert('Purchase Successfully, Order Details sent via Email');
                     document.location.href='shop.php';
                 </script>";
-                return true;
-            } else {
-                echo "<script>
-                    alert('Purchase Failed. Try Again');
-                </script>";
-                return false;
-            }
+                $userdata->change("checkout", "owned");
+                $_SESSION['count'] = 0;
+                $_SESSION['total'] = 0;
+            } 
+        } catch (Exception $e) {
+            $userdata->change("checkout", "cart");
+            $message->set("Payment Failed due to error in email.");
         }
     }
 
