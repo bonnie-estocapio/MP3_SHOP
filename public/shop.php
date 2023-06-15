@@ -3,6 +3,7 @@
 namespace App\Public;
 
 use App\Operation\Functions;
+use App\Operation\Message;
 use App\Track\Track;
 
 require '../vendor/autoload.php';
@@ -11,6 +12,7 @@ session_start();
 
 $functions = new Functions;
 $tracks = new Track;
+$message = new Message;
 
 $guest = $functions->state();
 ?>
@@ -24,6 +26,7 @@ $guest = $functions->state();
 
     <!-- Page Content -->
     <div class="container">
+    <h3 class="text-center"><?php $message->show();?></h3>
         <div class="search">
             <form method="post">
                 <input type="text" name="searchtext" placeholder="Search here">
