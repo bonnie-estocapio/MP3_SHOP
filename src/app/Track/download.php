@@ -10,9 +10,13 @@ class Download
     {
         $message = new Message;
 
+
         if (isset($_GET['path'])) {
+            $id = $_GET['id'];
+            $owned = $this->checkIfOwned($id);
             $filename = $_GET['path'];
-            if (file_exists($filename)) {
+
+            if (file_exists($filename) && $owned === true) {
                 header('Content-Description: File Transfer');
                 header('Content-Type: application/octet-stream');
                 header("Cache-Control: no-cache, must-revalidate");
@@ -24,8 +28,20 @@ class Download
                 readfile($filename);
 
                 die();
-            } else {
-                $message->set("File does not exist.");
+            }
+        }
+    }
+
+    public function checkIfOwned($trackID): bool
+    {
+        $owned = false;
+        foreach ($_SESSION as $data => $value) {
+            if ($data === 'product_' . $trackID) {
+                if ($value === "owned") {
+                    return true;
+                } else {
+                    return false;
+                }
             }
         }
     }

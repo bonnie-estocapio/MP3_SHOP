@@ -50,8 +50,8 @@ class Track
     public function display($trackID): void
     {
         $download = new Download;
-        $download->downloadTrack();
         $data = $this->list($trackID);
+        $download->downloadTrack();
         $track = <<<DELIMETER
             <div class="col-sm-4 col-lg-4 col-md-4">
                 <div class="thumbnail">
@@ -83,7 +83,7 @@ class Track
             echo $button;
         } elseif ($_SESSION['product_'.$trackID] === "owned") {
             $button = <<<DELIMITER
-                        <a class="btn btn-primary" href="{$_SERVER['REQUEST_URI']}?path=../resources/tracks/{$data['title']}.mp3">Download</a>
+                        <a class="btn btn-primary" href="{$_SERVER['REQUEST_URI']}?path=../resources/tracks/{$data['title']}.mp3&id={$trackID}">Download</a>
                     </div>
                 </div>
             DELIMITER;
