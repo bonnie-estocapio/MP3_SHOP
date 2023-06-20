@@ -13,7 +13,7 @@ class Download
         $database = new Database;
 
         if (isset($_GET['id'])) {
-            $id = $_GET['id'];
+            $id = intval($_GET['id']);
             $owned = $this->checkIfOwned($id);
             $query = $database->query("SELECT title from tracks WHERE id = " . $id);
             $data = $query->fetch(\PDO::FETCH_ASSOC);
