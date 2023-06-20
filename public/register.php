@@ -10,25 +10,7 @@ require '../vendor/autoload.php';
 $user = new User;
 $message = new Message;
 
-if (isset($_POST['submit'])) {
-    $check = 0;
-    foreach ($_POST as $data) {
-        if ($data === "") {
-            $check = 1;
-        }
-    }
-    if ($check === 0) {
-        $user->create(
-            $_POST['username'],
-            $_POST['password'],
-            $_POST['fullname'],
-            $_POST['address'],
-            $_POST['email']
-        );
-    } else {
-        $message->set("Some fields are not filled. Try again.");
-    }
-}
+$user->register();
 ?>
 
 <?php include '../src/app/Templates/header.php'; ?>
@@ -48,26 +30,31 @@ if (isset($_POST['submit'])) {
                     <div class="row">
                         <label for="username" class="form-label">Username:</label>
                         <input type="text" name="username" class="form-label" />
+                        <h6>* Must have 3-20 Characters</h4>
                     </div>
 
                     <div class="row">
                         <label for="password" class="form-label">Password:</label>
                         <input type="password" name="password" class="form-label" />
+                        <h6>* Must have atleast 1 of each: uppercase letter, lowercase letter, number, and symbol</h4>
                     </div>
 
                     <div class="row">
                         <label for="fullname" class="form-label">Full Name:</label>
                         <input type="text" name="fullname" class="form-label" />
+                        <h6>* Must contain letters only</h4>
                     </div>
 
                     <div class="row">
                         <label for="address" class="address">Address:</label>
                         <input type="text" name="address" class="form-label" />
+                        <h6>* Must follow the format: House#/Street# Street, Barangay, City, Province </h4>
                     </div>
 
                     <div class="row">
                         <label for="email" class="form-label">Email:</label>
                         <input type="email" name="email" id="email" class="form-label" class="form-control">
+                        <h6>* Must follow the usual email format </h4>
                     </div>
                     <button class="btn btn-primary" type="submit" name="submit" value="register">Register</button>
                 </form>
