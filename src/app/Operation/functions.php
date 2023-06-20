@@ -21,10 +21,10 @@ class Functions
         $location = $navigation->getCurrent();
 
         if ($location !== '/Music_Shop/register.php') {
-            $guest = true;
+            $this->guest = true;
 
             if (!isset($_SESSION['loggedin'])) {
-                $guest = true;
+                $this->guest = true;
 
                 for ($id = 1; $id <= 9; $id++) {
                     $_SESSION['product_'.$id] = 0;
@@ -33,12 +33,21 @@ class Functions
                 $_SESSION['loggedin'] = false;
                 $_SESSION['user'] = 'Guest';
             } elseif (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
-                $guest = false;
+                $this->guest = false;
             }
         } else {
-            $guest = true;
+            $this->guest = true;
         }
 
-        return $guest;
+        return $this->guest;
+    }
+
+    public function showUser(): void
+    {
+        $functions = new Functions;
+
+        $user = $functions->filter($_SESSION['user']);
+        
+        echo $user;
     }
 }
