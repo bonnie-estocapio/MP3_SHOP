@@ -128,7 +128,7 @@ Class User
         if ($valid) {
             $this->create($username, $password, $fullname, $address, $email);
         } else {
-            $message->set($errorMessage);
+            $message->set($errorMessage . "Please try again.");
         }
     }
 
