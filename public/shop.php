@@ -45,24 +45,8 @@ $guest = $functions->state();
                     <?php
                     if (!isset($_POST['search'])) {
                         $tracks->all();
-                    } elseif (isset($_POST['search']) && isset($_POST['category'])) {
-                        if ($_POST['category'] === 'title') {
-                            $tracks->search($_POST['searchtext'], 'title');
-                        } elseif ($_POST['category'] === 'artist') {
-                            $tracks->search($_POST['searchtext'], 'artist');
-                        } elseif ($_POST['category'] === 'album') {
-                            $tracks->search($_POST['searchtext'], 'album');
-                        } elseif ($_POST['category'] === 'genre') {
-                            $tracks->search($_POST['searchtext'], 'genre');
-                        } elseif ($_POST['category'] === 'year') {
-                            $tracks->search($_POST['searchtext'], 'year');
-                        }
-                    } elseif (isset($_POST['search']) && !isset($_POST['category'])) {
-                        echo
-                        "<script>
-                        alert('Category not Set');
-                        </script>";
-                        $tracks->all();
+                    } else {
+                        $tracks->search();
                     }
                     ?>
                 </div>

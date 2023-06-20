@@ -5,12 +5,7 @@ namespace App\Track;
 use App\Operation\Database;
 
 class Track
-{
-    public function __construct()
-    {
-        $_POST['searchtext'] = '';
-    }
-    
+{    
     public function list($trackID): array
     {
         $database = new Database;
@@ -23,22 +18,42 @@ class Track
         return $data;
     }
 
-    public function search($search, $category): void
+    public function search(): void
     {
         $database = new Database;
-        $query = $database->conn->prepare("SELECT id FROM tracks WHERE :category = ':search'");
-        $query->bindParam(':category', $category);
-        $query->bindParam(':search', $search);
-        $query->execute();
 
-        if($query === null) {
-            echo "Search result not Found";
+        if (!isset($_POST['category'])) {
+            echo
+            "<script>
+            alert('Please specify search category');
+            </script>";
+            $this->all();
         } else {
-            while($row = $query->fetch(\PDO::FETCH_ASSOC)) {
+            $category = $_POST['category'];
+            $search = $_POST['searchtext'];
+
+            if ($category === 'title') {
+                $query = $database->conn->prepare("SELECT id FROM tracks WHERE title = :search");
+            } elseif ($category === 'artist') {
+                $query = $database->conn->prepare("SELECT id FROM tracks WHERE artist = :search");
+            } elseif ($category === 'album') {
+                $query = $database->conn->prepare("SELECT id FROM tracks WHERE album = :search");
+            } elseif ($category === 'year') {
+                $query = $database->conn->prepare("SELECT id FROM tracks WHERE year = :search");
+            } elseif ($category === 'genre') {
+                $query = $database->conn->prepare("SELECT id FROM tracks WHERE genre = :search");
+            }
+            
+            $query->bindParam(':search', $search);
+            $query->execute();
+
+            while ($row = $query->fetch(\PDO::FETCH_ASSOC)) {
                 $this->display($row['id']);
             }
         }
     }
+
+
 
     public function owned(): void
     {
