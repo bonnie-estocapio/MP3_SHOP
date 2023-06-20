@@ -14,7 +14,6 @@ $functions = new Functions;
 $order = new Order;
 $tracks = new Track;
 
-$_POST['searchtext'] = '';
 $guest = $functions->state();
 ?>
 
