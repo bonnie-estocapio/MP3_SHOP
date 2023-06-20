@@ -15,7 +15,6 @@ $tracks = new Track;
 $message = new Message;
 
 $guest = $functions->state();
-$_POST['searchtext'] = '';
 ?>
 
 <?php include '../src/app/Templates/header.php'; ?>
