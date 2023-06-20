@@ -6,6 +6,11 @@ use App\Operation\Database;
 
 class Track
 {
+    public function __construct()
+    {
+        $_POST['searchtext'] = '';
+    }
+    
     public function list($trackID): array
     {
         $database = new Database;
