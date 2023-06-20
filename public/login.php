@@ -15,10 +15,7 @@ $user = new User;
 $navigation = new Navigation;
 
 $user->login();
-
-if (isset($_POST['signup'])) {
-    $navigation->goTo("register.php");
-}
+$user->signUp();
 ?>
 
 <?php include '../src/app/Templates/header.php'; ?>
