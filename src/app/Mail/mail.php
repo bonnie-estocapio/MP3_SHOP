@@ -60,7 +60,10 @@ class Mail
         foreach ($_SESSION as $data => $value) {
             if ($value === 1 && substr($data, 0, 8) === 'product_') {
                 $id = substr($data, 8);
-                $query = $database->query("SELECT * FROM tracks WHERE id = " . $id);
+                $query = $database->conn->prepare("SELECT * FROM tracks WHERE id = :id");
+                $query->bindParam(':id', $id);
+                $query->execute();
+
                 while ($row = $query->fetch(\PDO::FETCH_ASSOC)) {
                     $dataArray['product_'.$id] = $_SESSION['product_'.$id];
                     $body .= "

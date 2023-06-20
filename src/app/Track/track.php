@@ -14,15 +14,23 @@ class Track
     public function list($trackID): array
     {
         $database = new Database;
-        $query = $database->query("SELECT id, title, artist, year, album, genre,price FROM tracks WHERE id = $trackID");
+
+        $query = $database->conn->prepare("SELECT id, title, artist, year, album, genre,price FROM tracks WHERE id = :id");
+        $query->bindParam(':id', $trackID);
+        $query->execute();
         $data = $query->fetch(\PDO::FETCH_ASSOC);
+
         return $data;
     }
 
     public function search($search, $category): void
     {
         $database = new Database;
-        $query = $database->query("SELECT id FROM tracks WHERE {$category} = '{$search}'");
+        $query = $database->conn->prepare("SELECT id FROM tracks WHERE :category = ':search'");
+        $query->bindParam(':category', $category);
+        $query->bindParam(':search', $search);
+        $query->execute();
+
         if($query === null) {
             echo "Search result not Found";
         } else {
@@ -111,7 +119,10 @@ class Track
     public function getQuery($id): mixed
     {
         $database = new Database;
-        $query = $database->query("SELECT * FROM tracks WHERE id =". $id);
+        $query = $database->conn->prepare("SELECT * FROM tracks WHERE id = :id");
+        $query->bindParam(':id', $id);
+        $query->execute();
+
         return $query;
     }
 }

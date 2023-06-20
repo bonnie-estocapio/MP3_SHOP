@@ -41,7 +41,11 @@ Class UserData
         }
 
         $dataString = http_build_query($dataArray);
-        $query = $database->query("UPDATE users SET data = '{$dataString}' WHERE username = '{$username}'");
+        $query = $database->conn->prepare("UPDATE users SET data = :dataString WHERE username = :username");
+        $query->bindParam(':dataString', $dataString);
+        $query->bindParam(':username', $username);
+        $query->execute();
+
         if (!$query) {
             echo "failed to input data";
         }
@@ -52,8 +56,13 @@ Class UserData
         $database = new Database;
 
         $newArray = [];
-        $query = $database->query("SELECT data FROM users WHERE username = '{$_SESSION['user']}'");
+        $activeUser = $_SESSION['user'];
+
+        $query = $database->conn->prepare("SELECT data FROM users WHERE username = :activeUser");
+        $query->bindParam(':activeUser', $activeUser);
+        $query->execute();
         $data = $query->fetch(\PDO::FETCH_ASSOC);
+        
         $data['data'] = trim($data['data'], '{()}');
         parse_str($data['data'], $newArray);
         

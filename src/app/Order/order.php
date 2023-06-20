@@ -12,14 +12,20 @@ class Order
 
     public function log($dataArray): void
     {
-        $dbase = new Database;
+        $database = new Database;
 
         $username = $_SESSION['user'];
         $total = $_SESSION['total'];
         $count = $_SESSION['count'];
         $dataString = http_build_query($dataArray);
 
-        $query = $dbase->query("INSERT INTO history (username, data, total, count) VALUES ('{$username}', '{$dataString}', '{$total}', '{$count}')");
+        $query = $database->conn->prepare("INSERT INTO history (username, data, total, count) VALUES (:username, :dataString, :total, :count)");
+        $query->bindParam(':username', $username);
+        $query->bindParam(':dataString', $dataString);
+        $query->bindParam(':total', $total);
+        $query->bindParam(':count', $count);
+        $query->execute();
+
         if (!$query) {
             echo "failed to input data";
         }
@@ -27,15 +33,22 @@ class Order
 
     public function readLog($orderID, $username): void
     {
-        $dbase = new Database;
+        $database = new Database;
 
         if ($orderID === null) {
-            $orderQuery = $dbase->query("SELECT id, data, date FROM history WHERE username = '{$username}'");
+            $orderQuery = $database->conn->prepare("SELECT id, data, date FROM history WHERE username = :username");
+            $orderQuery->bindParam(':username', $username);
+            $orderQuery->execute();
+
             while ($row = $orderQuery->fetch(\PDO::FETCH_ASSOC)) {
                 $this->show($row);
             }
         } else {
-            $orderQuery = $dbase->query("SELECT id, data, date FROM history WHERE username = '{$username}' && id = '{$orderID}'");
+            $orderQuery = $database->conn->prepare("SELECT id, data, date FROM history WHERE username = :username && id = :orderID");
+            $orderQuery->bindParam(':username', $username);
+            $orderQuery->bindParam(':orderID', $orderID);
+            $orderQuery->execute();
+
             while ($row = $orderQuery->fetch(\PDO::FETCH_ASSOC)) {
                 $this->show($row);
             }

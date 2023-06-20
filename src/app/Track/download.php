@@ -15,8 +15,12 @@ class Download
         if (isset($_GET['id'])) {
             $id = intval($_GET['id']);
             $owned = $this->checkIfOwned($id);
-            $query = $database->query("SELECT title from tracks WHERE id = " . $id);
+
+            $query = $database->conn->prepare("SELECT title from tracks WHERE id = :id");
+            $query->bindParam(':id', $id);
+            $query->execute();
             $data = $query->fetch(\PDO::FETCH_ASSOC);
+
             $filename = "../resources/tracks/{$data['title']}.mp3";
 
             if (file_exists($filename) && $owned === true) {

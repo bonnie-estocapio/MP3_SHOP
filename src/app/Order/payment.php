@@ -12,11 +12,13 @@ class Payment
     public function pay($username, $total, $count): void
     {
         $mail = new Mail;
-        $dbase = new Database;
+        $database = new Database;
         $userdata = new UserData;
         $order = new Order;
 
-        $query = $dbase->query("SELECT email FROM users WHERE username='{$username}'");
+        $query = $database->conn->prepare("SELECT email FROM users WHERE username = :username");
+        $query->bindParam(':username', $username);
+        $query->execute();
         $email = $query->fetch(\PDO::FETCH_ASSOC);
 
         $userdata->change("cart", "checkout");

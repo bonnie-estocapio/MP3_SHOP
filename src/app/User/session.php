@@ -15,7 +15,10 @@ Class Session
     {
         $database = new Database;
         if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
-            $database->query("INSERT INTO sessions (session_id, user) VALUES ('$sessionID', '$username')");
+            $query = $database->conn->prepare("INSERT INTO sessions (session_id, user) VALUES (:sessionID, :username)");
+            $query->bindParam(':sessionID', $sessionID);
+            $query->bindParam(':username', $username);
+            $query->execute();
         }
     }
 
