@@ -47,8 +47,12 @@ class Track
             $query->bindParam(':search', $search);
             $query->execute();
 
-            while ($row = $query->fetch(\PDO::FETCH_ASSOC)) {
-                $this->display($row['id']);
+            if ($query->rowCount() === 0) {
+                echo "no results found";
+            } else {
+                while ($row = $query->fetch(\PDO::FETCH_ASSOC)) {
+                    $this->display($row['id']);
+                }
             }
         }
     }
