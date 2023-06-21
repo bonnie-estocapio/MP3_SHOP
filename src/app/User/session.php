@@ -4,7 +4,7 @@ namespace App\User;
 
 use App\Operation\Database;
 
-Class Session
+class Session
 {
     public function __construct()
     {

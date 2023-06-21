@@ -5,7 +5,7 @@ namespace App\User;
 use App\Operation\Database;
 use App\Track\Track;
 
-Class UserData
+class UserData
 {
     public function change($before, $after): void
     {

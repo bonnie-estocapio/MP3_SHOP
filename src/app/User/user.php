@@ -6,7 +6,7 @@ use App\Operation\Database;
 use App\Operation\Message;
 use App\Operation\Navigation;
 
-Class User
+class User
 {
     public function login(): void
     {
