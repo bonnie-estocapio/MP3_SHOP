@@ -3,6 +3,7 @@
 namespace App\Track;
 
 use App\Operation\Database;
+use App\Operation\Functions;
 
 class Track
 {    
@@ -21,6 +22,7 @@ class Track
     public function search(): void
     {
         $database = new Database;
+        $functions = new Functions;
 
         if (!isset($_POST['category'])) {
             echo
@@ -31,6 +33,7 @@ class Track
         } else {
             $category = $_POST['category'];
             $search = $_POST['searchtext'];
+            $search = $functions->filter($search);
 
             if ($category === 'title') {
                 $query = $database->conn->prepare("SELECT id FROM tracks WHERE title = :search");
@@ -48,8 +51,9 @@ class Track
             $query->execute();
 
             if ($query->rowCount() === 0) {
-                echo "no results found";
+                echo "no results found for: " . $search;
             } else {
+                echo "Search results for: " . $search;
                 while ($row = $query->fetch(\PDO::FETCH_ASSOC)) {
                     $this->display($row['id']);
                 }
