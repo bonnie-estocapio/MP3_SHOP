@@ -4,6 +4,7 @@ namespace App\Public;
 
 use App\Operation\Message;
 use App\Operation\Navigation;
+use App\User\Create;
 use App\User\User;
 
 require '../vendor/autoload.php';
@@ -13,9 +14,10 @@ session_start();
 $message = new Message;
 $user = new User;
 $navigation = new Navigation;
+$create = new Create;
 
 $user->login();
-$user->signUp();
+$create->signUp();
 ?>
 
 <?php include '../src/app/Templates/header.php'; ?>

@@ -3,14 +3,14 @@
 namespace App\Public;
 
 use App\Operation\Message;
-use App\User\User;
+use App\User\Create;
 
 require '../vendor/autoload.php';
 
-$user = new User;
+$create = new Create;
 $message = new Message;
 
-$user->register();
+$create->register();
 ?>
 
 <?php include '../src/app/Templates/header.php'; ?>
@@ -48,7 +48,7 @@ $user->register();
                     <div class="row">
                         <label for="address" class="address">Address:</label>
                         <input type="text" name="address" class="form-label" />
-                        <h6>* Must follow the format: House#/Street# Street, Barangay, City, Province </h4>
+                        <h6>* Must follow the format: Numeber(if availables) Street/Sitio, Barangay, City/Municipality, Province </h4>
                     </div>
 
                     <div class="row">
